@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CoreArmorX configuration reference for styles, recipes, tokens, lore, permissions, and troubleshooting.">
+    <title>CoreArmorX Configuration</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script defer src="./assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a href="./features.html">Features</a>
+          <a href="./installation.html">Setup</a>
+          <a href="./docs.html">Docs</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="https://github.com/IceWolf23X/BetterCustomArmors">GitHub</a>
+        </div>
+        <div class="nav-actions">
+          <a class="nav-cta nav-download" href="./installation.html">Download</a>
+          <a class="nav-cta" href="./docs.html">Docs</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="shell section-heading centered">
+          <p class="eyebrow">Configuration</p>
+          <h1>Control styles, recipes, tokens, lore, and permissions from YAML.</h1>
+          <p>The MVP keeps configuration small enough to audit while still giving server owners useful control.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell doc-layout">
+          <article class="markdown-body">
+            <h2>Files</h2>
+            <ul>
+              <li><code>plugins/CoreArmorX/config.yml</code></li>
+              <li><code>plugins/CoreArmorX/messages.yml</code></li>
+            </ul>
+
+            <h2>Settings</h2>
+            <div class="code-block"><pre><code>settings:
+  debug: false
+  preserve-custom-name: true
+  add-style-lore: true
+  require-permission-for-styles: false
+  allow-full-set-apply: true
+  allow-reset: true</code></pre></div>
+
+            <h2>Style Example</h2>
+            <div class="code-block"><pre><code>styles:
+  diamond:
+    enabled: true
+    display-name: "&lt;aqua&gt;Diamond Style"
+    rarity: RARE
+    permission: "corearmorx.style.diamond"
+    materials:
+      helmet: DIAMOND_HELMET
+      chestplate: DIAMOND_CHESTPLATE
+      leggings: DIAMOND_LEGGINGS
+      boots: DIAMOND_BOOTS</code></pre></div>
+
+            <h2>Recipe Ingredients</h2>
+            <div class="code-block"><pre><code>recipes:
+  crafting:
+    enabled: true
+    ingredients:
+      diamond: DIAMOND
+      gold: GOLD_INGOT
+      iron: IRON_INGOT
+      chainmail: CHAIN
+      leather: LEATHER</code></pre></div>
+
+            <h2>Tokens</h2>
+            <p>
+              Tokens are real items tagged with CoreArmorX PDC keys. They are intended for crates, shops,
+              rank rewards, and event rewards.
+            </p>
+            <div class="code-block"><pre><code>tokens:
+  enabled: true
+  consume-on-apply: true
+  require-token-for-command-apply: false
+  require-token-for-wardrobe-apply: true
+  item-material: PAPER</code></pre></div>
+
+            <h2>Permissions</h2>
+            <ul>
+              <li><code>corearmorx.command</code></li>
+              <li><code>corearmorx.reload</code></li>
+              <li><code>corearmorx.apply</code></li>
+              <li><code>corearmorx.reset</code></li>
+              <li><code>corearmorx.inspect</code></li>
+              <li><code>corearmorx.token.give</code></li>
+              <li><code>corearmorx.style.&lt;style&gt;</code></li>
+            </ul>
+
+            <h2 id="troubleshooting">Troubleshooting</h2>
+            <ul>
+              <li>If recipes do not change, run <code>/corearmorx reload</code> or restart.</li>
+              <li>If an item does not convert, confirm it is Netherite armor or a CoreArmorX styled item.</li>
+              <li>If a style is unavailable, confirm <code>enabled: true</code> and the material names are valid Bukkit materials.</li>
+              <li>If players cannot apply styles, check <code>require-permission-for-styles</code> and per-style permission nodes.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <p>Every style should be visible in config and safe in item metadata.</p>
+      </div>
+    </footer>
+  </body>
+</html>

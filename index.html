@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CoreArmorX is a lightweight Vanilla+ armor customization plugin for modern Paper servers. Keep Netherite power and choose your own style.">
+    <title>CoreArmorX - Vanilla+ Armor Customization for Paper Servers</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
+    <meta name="theme-color" content="#071008">
+    <script>
+      (() => {
+        try {
+          if (localStorage.getItem("corearmorx-theme") === "light") {
+            document.documentElement.dataset.theme = "light";
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script defer src="./assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="#features">Features</a>
+          <a href="./installation.html">Setup</a>
+          <a href="./docs.html">Docs</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="https://github.com/IceWolf23X/BetterCustomArmors">GitHub</a>
+        </div>
+
+        <div class="nav-actions">
+          <a class="nav-cta nav-download" href="./installation.html">Download</a>
+          <a class="nav-cta" href="./installation.html">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Keep Netherite power. Choose your own style.</p>
+            <h1>CoreArmorX</h1>
+            <p class="hero-lead">
+              Vanilla+ armor styling for modern Paper servers. Let players apply visual armor styles while
+              preserving Netherite behavior, item data, enchantments, durability, and the clean feel of Minecraft.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="./installation.html">Get Started</a>
+              <a class="button button-secondary" href="#features">Explore Features</a>
+            </div>
+            <ul class="hero-facts" aria-label="CoreArmorX platform facts">
+              <li>Paper 1.21.x</li>
+              <li>Java 21</li>
+              <li>No resource pack required</li>
+              <li>Reward-ready tokens</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="CoreArmorX armor preview">
+            <div class="product-frame">
+              <div class="frame-top">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="frame-title">Armor Style Preview</span>
+              </div>
+
+              <div class="dashboard-grid">
+                <section class="chat-console case-board" aria-label="Conversion preview">
+                  <div class="console-head">
+                    <span>Netherite Chestplate</span>
+                    <strong>Diamond Style</strong>
+                  </div>
+                  <div class="message-row">
+                    <span class="rank owner">Base</span>
+                    <p>Stats, toughness, knockback resistance, durability, and enchantments stay Netherite.</p>
+                  </div>
+                  <div class="message-row">
+                    <span class="rank staff">Visual</span>
+                    <p>The item can look like Diamond, Gold, Iron, Chainmail, Leather, or a configured profile.</p>
+                  </div>
+                  <div class="message-row">
+                    <span class="rank player">Identity</span>
+                    <p>CoreArmorX metadata is stored in PersistentDataContainer, not copied lore text.</p>
+                  </div>
+                </section>
+
+                <section class="status-column" aria-label="CoreArmorX components">
+                  <article class="mini-card">
+                    <span class="mini-icon case-icon" aria-hidden="true"></span>
+                    <div>
+                      <strong>Styles</strong>
+                      <small>config-driven materials</small>
+                    </div>
+                  </article>
+                  <article class="mini-card">
+                    <span class="mini-icon evidence-icon" aria-hidden="true"></span>
+                    <div>
+                      <strong>Tokens</strong>
+                      <small>crate and shop ready</small>
+                    </div>
+                  </article>
+                  <article class="mini-card">
+                    <span class="mini-icon safe-icon" aria-hidden="true"></span>
+                    <div>
+                      <strong>Reset</strong>
+                      <small>restore visual Netherite</small>
+                    </div>
+                  </article>
+                </section>
+
+                <section class="network-card" aria-label="Style flow">
+                  <div class="network-node">Netherite</div>
+                  <span class="network-line"></span>
+                  <div class="network-node active">Style</div>
+                  <span class="network-line"></span>
+                  <div class="network-node">Reset</div>
+                </section>
+
+                <section class="item-card" aria-label="Token preview">
+                  <span class="mini-icon storage-icon" aria-hidden="true"></span>
+                  <div>
+                    <strong>Style Token</strong>
+                    <small>physical reward item</small>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="shell stat-strip" aria-label="CoreArmorX summary">
+          <article>
+            <strong>5</strong>
+            <span>default vanilla styles</span>
+          </article>
+          <article>
+            <strong>PDC</strong>
+            <span>safe item identity</span>
+          </article>
+          <article>
+            <strong>Netherite</strong>
+            <span>stats preserved</span>
+          </article>
+          <article>
+            <strong>YAML</strong>
+            <span>server-owner control</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Core feature set</p>
+            <h2>A small armor system with the parts servers actually need.</h2>
+            <p>
+              CoreArmorX focuses on armor styling, reward distribution, safe conversion, and clean admin control
+              instead of becoming a heavy custom-item framework.
+            </p>
+          </div>
+
+          <div class="feature-grid main-feature-grid">
+            <article class="feature-card feature-large">
+              <span class="card-icon case-icon" aria-hidden="true"></span>
+              <h3>Visual Armor Styles</h3>
+              <p>
+                Convert Netherite armor into Diamond, Gold, Iron, Chainmail, Leather, or future profile styles
+                while keeping the functional value of the original equipment.
+              </p>
+            </article>
+
+            <article class="feature-card feature-large">
+              <span class="card-icon safe-icon" aria-hidden="true"></span>
+              <h3>Metadata Preservation</h3>
+              <p>
+                Names, lore, enchantments, damage, repair cost, trims, flags, unbreakable state and custom data are
+                preserved through conversion and reset flows.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-icon evidence-icon" aria-hidden="true"></span>
+              <h3>Style Tokens</h3>
+              <p>Physical token items make armor styles useful for crates, shops, ranks, events, quests, and rewards.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="card-icon storage-icon" aria-hidden="true"></span>
+              <h3>Config-Driven Recipes</h3>
+              <p>Server owners decide which styles are enabled, which materials apply them, and which lore appears.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section why-section">
+        <div class="shell">
+          <div class="section-heading centered">
+            <p class="eyebrow">Vanilla+ positioning</p>
+            <h2>Cosmetic freedom without changing the server's power curve.</h2>
+            <p>
+              Players get identity and style. Owners get a reward system. The armor still behaves like Netherite.
+            </p>
+          </div>
+
+          <div class="setup-grid">
+            <article class="setup-card">
+              <div class="setup-kicker">For players</div>
+              <h3>Wear the look you want</h3>
+              <p>Use styles without losing the value of a maxed Netherite set.</p>
+            </article>
+
+            <article class="setup-card featured-setup">
+              <div class="setup-kicker">For owners</div>
+              <h3>Turn styles into rewards</h3>
+              <p>Tokens, commands, permissions, and future unlocks fit crate, shop, rank, and event workflows.</p>
+            </article>
+
+            <article class="setup-card">
+              <div class="setup-kicker">For admins</div>
+              <h3>Inspect and reset safely</h3>
+              <p>Commands expose CoreArmorX metadata and let staff restore styled items when needed.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-cta">
+        <div class="shell centered">
+          <p class="eyebrow">Ready for the MVP branch</p>
+          <h2>Install CoreArmorX, enable the default styles, and test the conversion loop.</h2>
+          <div class="hero-actions centered-actions">
+            <a class="button button-primary" href="./installation.html">View Setup</a>
+            <a class="button button-secondary" href="./configuration.html">Open Config Reference</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <p>Vanilla+ armor cosmetics, Netherite power, reward-ready, CoreX aligned.</p>
+      </div>
+    </footer>
+  </body>
+</html>

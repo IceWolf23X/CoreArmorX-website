@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CoreArmorX FAQ for resource packs, Netherite stats, style tokens, item metadata, permissions, and future integrations.">
+    <title>CoreArmorX FAQ</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script defer src="./assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a href="./features.html">Features</a>
+          <a href="./installation.html">Setup</a>
+          <a href="./docs.html">Docs</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="https://github.com/IceWolf23X/BetterCustomArmors">GitHub</a>
+        </div>
+        <div class="nav-actions">
+          <a class="nav-cta nav-download" href="./installation.html">Download</a>
+          <a class="nav-cta" href="./docs.html">Docs</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="shell section-heading centered">
+          <p class="eyebrow">FAQ</p>
+          <h1>Common questions about CoreArmorX.</h1>
+          <p>Short answers for server owners testing the first MVP.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell faq-list" data-animated-details>
+          <details open>
+            <summary>Does CoreArmorX require a resource pack?</summary>
+            <p>No. The MVP uses vanilla armor materials and works without CustomModelData or a forced pack.</p>
+          </details>
+          <details>
+            <summary>Does styled armor really keep Netherite behavior?</summary>
+            <p>Styled pieces receive Netherite-equivalent armor values, toughness, knockback resistance, and durability. Test a full set on your Paper version before public rollout.</p>
+          </details>
+          <details>
+            <summary>Can players fake a style token by renaming paper?</summary>
+            <p>No. Token identity is stored in PersistentDataContainer. Display name and lore are only presentation.</p>
+          </details>
+          <details>
+            <summary>What item data is preserved?</summary>
+            <p>CoreArmorX preserves names, lore, enchantments, damage, repair cost, trims where supported, item flags, unbreakable state, compatible custom model data, non-CoreArmorX PDC, and non-CoreArmorX attribute modifiers.</p>
+          </details>
+          <details>
+            <summary>Can styles require permissions?</summary>
+            <p>Yes. Enable <code>settings.require-permission-for-styles</code> and assign per-style nodes such as <code>corearmorx.style.diamond</code>.</p>
+          </details>
+          <details>
+            <summary>Are wardrobe GUI and permanent unlocks included?</summary>
+            <p>Not in the first MVP. They are planned follow-up systems once conversion, reset, tokens, recipes, and metadata behavior are stable.</p>
+          </details>
+          <details>
+            <summary>Is CoreCaseX or CoreChatX required?</summary>
+            <p>No. CoreArmorX is CoreX-aligned, but integrations must stay optional.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <p>Simple for players, robust for server owners.</p>
+      </div>
+    </footer>
+  </body>
+</html>

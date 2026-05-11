@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CoreArmorX feature overview: armor styles, Netherite stat preservation, tokens, reset commands, recipes, and future CoreX integrations.">
+    <title>CoreArmorX Features</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script defer src="./assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a href="./features.html">Features</a>
+          <a href="./installation.html">Setup</a>
+          <a href="./docs.html">Docs</a>
+          <a href="./faq.html">FAQ</a>
+          <a href="https://github.com/IceWolf23X/BetterCustomArmors">GitHub</a>
+        </div>
+        <div class="nav-actions">
+          <a class="nav-cta nav-download" href="./installation.html">Download</a>
+          <a class="nav-cta" href="./installation.html">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="shell section-heading centered">
+          <p class="eyebrow">Feature overview</p>
+          <h1>Armor customization built around safe Netherite preservation.</h1>
+          <p>
+            CoreArmorX keeps the MVP focused: style armor, preserve data, expose useful admin commands,
+            and keep future wardrobe, unlock, smithing, and CoreX integrations modular.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell feature-grid main-feature-grid">
+          <article class="feature-card feature-large">
+            <span class="card-icon case-icon" aria-hidden="true"></span>
+            <h3>Material Styles</h3>
+            <p>
+              Default styles convert Netherite pieces into Diamond, Gold, Iron, Chainmail, or Leather visuals.
+              Each piece maps by armor slot and can be enabled or disabled from config.
+            </p>
+          </article>
+          <article class="feature-card feature-large">
+            <span class="card-icon safe-icon" aria-hidden="true"></span>
+            <h3>Netherite Behavior</h3>
+            <p>
+              Styled armor receives Netherite-equivalent armor points, toughness, knockback resistance,
+              durability, and fire-resistant item behavior where supported by the Paper API.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="card-icon storage-icon" aria-hidden="true"></span>
+            <h3>PDC Identity</h3>
+            <p>Styled armor and tokens use namespaced PersistentDataContainer keys instead of display text.</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-icon timeline-icon" aria-hidden="true"></span>
+            <h3>Conversion Loop</h3>
+            <p>Players can apply a style, switch to another style, and reset back to visual Netherite.</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-icon evidence-icon" aria-hidden="true"></span>
+            <h3>Style Tokens</h3>
+            <p>Admins can create physical style tokens for crates, shops, rank rewards, and events.</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-icon board-icon" aria-hidden="true"></span>
+            <h3>Command Surface</h3>
+            <p>Apply, reset, inspect, reload, and token commands cover the MVP without forcing a GUI.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section docs-section">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Roadmap-ready</p>
+            <h2>The first release is small by design.</h2>
+            <p>These systems are intentionally left modular so future phases can extend them without breaking the core conversion model.</p>
+          </div>
+          <div class="setup-grid">
+            <article class="setup-card">
+              <div class="setup-kicker">Next</div>
+              <h3>Smithing support</h3>
+              <p>Style application through the Smithing Table can build on the same conversion service.</p>
+            </article>
+            <article class="setup-card">
+              <div class="setup-kicker">Next</div>
+              <h3>Wardrobe GUI</h3>
+              <p>A future menu can show available, locked, token-required, and equipped styles.</p>
+            </article>
+            <article class="setup-card">
+              <div class="setup-kicker">Next</div>
+              <h3>Permanent unlocks</h3>
+              <p>UUID-based storage can let players keep styles forever after rewards or purchases.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="./index.html" aria-label="CoreArmorX home">
+          <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
+          <span class="brand-text">CoreArmorX</span>
+        </a>
+        <p>Keep Netherite power. Choose your own style.</p>
+      </div>
+    </footer>
+  </body>
+</html>
