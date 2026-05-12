@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Install CoreArmorX on a Paper Minecraft server and verify commands, configs, recipes, and armor conversion.">
-    <title>CoreArmorX Installation</title>
+    <meta name="description" content="CoreArmorX setup page shell.">
+    <title>CoreArmorX Setup</title>
     <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
     <link rel="stylesheet" href="./assets/styles.css">
     <script defer src="./assets/site.js"></script>
@@ -21,69 +21,18 @@
         <div class="nav-links" id="nav-links">
           <a href="./features.html">Features</a>
           <a href="./installation.html">Setup</a>
+          <a href="./configuration.html">Config</a>
           <a href="./docs.html">Docs</a>
           <a href="./faq.html">FAQ</a>
-          <a href="https://github.com/IceWolf23X/BetterCustomArmors">GitHub</a>
+          <a href="https://github.com/IceWolf23X/CoreArmorX-website">GitHub</a>
         </div>
-        <div class="nav-actions">
-          <a class="nav-cta nav-download" href="./installation.html">Download</a>
-          <a class="nav-cta" href="./configuration.html">Configure</a>
-        </div>
+        <div class="nav-actions"></div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="page-hero">
-        <div class="shell section-heading centered">
-          <p class="eyebrow">Setup</p>
-          <h1>Install the jar, boot once, then test one style loop.</h1>
-          <p>CoreArmorX is a Paper plugin. The MVP has no hard dependency on Vault, PlaceholderAPI, CoreCaseX, CoreChatX, ItemsAdder, Oraxen, or a resource pack.</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="shell doc-layout">
-          <article class="markdown-body">
-            <h2>Requirements</h2>
-            <ul>
-              <li>Paper 1.21.x, developed against Paper API 1.21.4.</li>
-              <li>Java 21.</li>
-              <li>Server restart access for first install.</li>
-            </ul>
-
-            <h2>Install</h2>
-            <ol>
-              <li>Place <code>CoreArmorX-1.0.0-SNAPSHOT.jar</code> inside the server <code>plugins</code> folder.</li>
-              <li>Restart the server.</li>
-              <li>Confirm <code>/plugins</code> shows <code>CoreArmorX</code>.</li>
-              <li>Open <code>plugins/CoreArmorX/config.yml</code> and adjust styles or recipe ingredients.</li>
-              <li>Run <code>/corearmorx reload</code> after config edits.</li>
-            </ol>
-
-            <h2>First Test</h2>
-            <ol>
-              <li>Give yourself Netherite armor.</li>
-              <li>Craft it with a configured style ingredient using the default shape.</li>
-              <li>Use <code>/corearmorx inspect hand</code> on the styled item.</li>
-              <li>Use <code>/corearmorx reset hand</code> and confirm the item returns to visual Netherite.</li>
-            </ol>
-
-            <h2>Useful Commands</h2>
-            <div class="code-block"><pre><code>/corearmorx help
-/corearmorx reload
-/corearmorx apply diamond hand
-/corearmorx apply gold armor
-/corearmorx reset hand
-/corearmorx inspect hand
-/corearmorx token give IceWolf23X diamond 1</code></pre></div>
-
-            <h2>Default Recipe Shape</h2>
-            <div class="code-block"><pre><code> M 
-MAM
- M </code></pre></div>
-            <p><code>A</code> is the armor piece. <code>M</code> is the style ingredient from config.</p>
-          </article>
-        </div>
+      <section class="page-hero" aria-label="Setup page shell">
+        <div class="shell section-heading centered"></div>
       </section>
     </main>
 
@@ -93,7 +42,6 @@ MAM
           <span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span>
           <span class="brand-text">CoreArmorX</span>
         </a>
-        <p>Install small, test carefully, expand after the core conversion is solid.</p>
       </div>
     </footer>
   </body>
