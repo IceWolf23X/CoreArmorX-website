@@ -740,12 +740,14 @@ h3 {
 }
 
 .main-feature-grid {
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .feature-card {
   position: relative;
   overflow: hidden;
+  min-height: 310px;
+  padding: 24px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
@@ -783,6 +785,12 @@ h3 {
 .feature-small {
   min-height: 230px;
   padding: 22px;
+}
+
+@media (min-width: 961px) {
+  .overview-feature-grid > .feature-card:nth-child(5) {
+    grid-column: 2;
+  }
 }
 
 .feature-card p,
@@ -1867,12 +1875,17 @@ details p {
 
   .feature-large,
   .feature-small,
+  .feature-card,
   .setup-card,
   .resource-card,
   .value-card,
   .final-cta,
   .markdown-body {
     padding: 22px;
+  }
+
+  .feature-card {
+    min-height: auto;
   }
 
   .footer-grid,
