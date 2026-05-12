@@ -474,7 +474,7 @@ h3 {
   border-radius: 26px;
   background:
     radial-gradient(circle at 78% 6%, rgba(214, 246, 0, 0.23), transparent 18rem),
-    linear-gradient(145deg, rgba(48, 23, 14, 0.92), rgba(18, 8, 6, 0.96));
+    linear-gradient(145deg, rgba(12, 31, 16, 0.92), rgba(6, 16, 8, 0.96));
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   padding: 18px;
 }
@@ -703,7 +703,7 @@ h3 {
 }
 
 .stat-strip article {
-  background: rgba(31, 15, 10, 0.82);
+  background: rgba(12, 31, 16, 0.82);
   padding: 22px;
 }
 
@@ -749,7 +749,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(14, 31, 17, 0.92), rgba(31, 15, 10, 0.92)),
+    linear-gradient(180deg, rgba(14, 31, 17, 0.92), rgba(8, 24, 12, 0.92)),
     var(--surface);
   box-shadow: 0 16px 44px rgba(0, 0, 0, 0.18);
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
@@ -927,7 +927,7 @@ h3 {
 .why-section {
   background:
     radial-gradient(circle at 82% 26%, rgba(130, 215, 25, 0.11), transparent 24rem),
-    linear-gradient(180deg, rgba(31, 15, 10, 0.72), rgba(18, 8, 6, 0.62));
+    linear-gradient(180deg, rgba(12, 31, 16, 0.72), rgba(6, 16, 8, 0.62));
   border-block: 1px solid rgba(130, 215, 25, 0.1);
 }
 
@@ -951,7 +951,7 @@ h3 {
 .value-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(31, 15, 10, 0.76);
+  background: rgba(12, 31, 16, 0.76);
   padding: 28px;
 }
 
@@ -973,7 +973,7 @@ h3 {
   border-radius: 24px;
   background:
     radial-gradient(circle at 82% 0%, rgba(32, 200, 58, 0.1), transparent 18rem),
-    rgba(31, 15, 10, 0.82);
+    rgba(12, 31, 16, 0.82);
   padding: 30px;
 }
 
@@ -981,7 +981,7 @@ h3 {
   border-color: rgba(130, 215, 25, 0.36);
   background:
     radial-gradient(circle at 82% 0%, rgba(130, 215, 25, 0.16), transparent 18rem),
-    rgba(31, 15, 10, 0.88);
+    rgba(12, 31, 16, 0.88);
 }
 
 .setup-kicker {
@@ -1044,7 +1044,7 @@ h3 {
 }
 
 .docs-section {
-  background: rgba(18, 8, 6, 0.58);
+  background: rgba(6, 16, 8, 0.58);
   border-block: 1px solid rgba(130, 215, 25, 0.1);
 }
 
@@ -1061,7 +1061,7 @@ h3 {
   justify-content: space-between;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(31, 15, 10, 0.78);
+  background: rgba(12, 31, 16, 0.78);
   padding: 24px;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -1102,7 +1102,7 @@ h3 {
 details {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: rgba(31, 15, 10, 0.74);
+  background: rgba(12, 31, 16, 0.74);
   overflow: hidden;
   transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
 }
@@ -1258,7 +1258,7 @@ details p {
 .doc-note {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(31, 15, 10, 0.78);
+  background: rgba(12, 31, 16, 0.78);
   padding: 24px;
 }
 
@@ -1300,7 +1300,7 @@ details p {
   gap: 5px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(31, 15, 10, 0.82);
+  background: rgba(12, 31, 16, 0.82);
   padding: 14px;
 }
 
@@ -1380,7 +1380,7 @@ details p {
   overflow-x: hidden;
   border: 1px solid var(--line);
   border-radius: 24px;
-  background: rgba(31, 15, 10, 0.76);
+  background: rgba(12, 31, 16, 0.76);
   padding: 34px;
 }
 
@@ -1924,32 +1924,44 @@ details p {
   border-color: rgba(130, 215, 25, 0.28);
   background:
     radial-gradient(circle at 78% 6%, rgba(214, 246, 0, 0.16), transparent 18rem),
-    linear-gradient(145deg, rgba(45, 31, 24, 0.92), rgba(16, 11, 11, 0.96));
+    linear-gradient(145deg, rgba(13, 34, 17, 0.92), rgba(6, 16, 8, 0.96));
 }
 
 .button-primary {
   background: linear-gradient(135deg, #20c83a, #82d719 54%, #d6f600);
-  color: #160d09;
+  color: #071008;
 }
 
-.case-icon {
-  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M6 6.5A3.5 3.5 0 0 1 9.5 3h5A3.5 3.5 0 0 1 18 6.5v1H6v-1Z' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M4 8h16v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V8Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 13h8M8 17h5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+.style-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M8 4h8l3 5-2 10H7L5 9l3-5Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 4l4 5 4-5M5 9h14M9 13h6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-.board-icon {
-  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M5 4h14v16H5V4Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 8h8M8 12h8M8 16h5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+.stats-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M12 3 20 7v5c0 4.4-2.8 7.6-8 9-5.2-1.4-8-4.6-8-9V7l8-4Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M9 12h6M12 9v6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
-.evidence-icon {
-  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M12 3 20 7v5c0 4.2-2.9 7.4-8 9-5.1-1.6-8-4.8-8-9V7l8-4Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M9 12h6M12 9v6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+.token-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M5 8a3 3 0 0 0 0 6v3a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-3a3 3 0 0 0 0-6V7a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v1Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M10 9h4M10 13h4M10 17h3' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
-.timeline-icon {
-  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M7 5v14M7 7h10l-2 4 2 4H7' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+.conversion-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M5 8h12m0 0-3-3m3 3-3 3M19 16H7m0 0 3-3m-3 3 3 3' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-.storage-icon {
-  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cellipse cx='12' cy='6' rx='7' ry='3' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+.pdc-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M9 8h6M9 12h6M9 16h3' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.reset-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M6 9a7 7 0 1 1 1.9 7.7' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M6 9V5M6 9h4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.recipe-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='M5 5h5v5H5V5Zm9 0h5v5h-5V5ZM5 14h5v5H5v-5Zm9 0h5v5h-5v-5Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.commands-icon {
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 28 28'%3E%3Cpath d='m6 8 4 4-4 4M12 16h6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4 5h16v14H4V5Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 .safe-icon {
@@ -1961,23 +1973,23 @@ details p {
 }
 
 .case-board .rank.owner {
-  color: #ffe5ab;
+  color: #eaff9c;
   background: rgba(214, 246, 0, 0.16);
 }
 
 .case-board .rank.staff {
-  color: #ffc4a3;
+  color: #caff8a;
   background: rgba(130, 215, 25, 0.15);
 }
 
 .case-board .rank.player {
-  color: #ffb0a4;
+  color: #a8ffbb;
   background: rgba(32, 200, 58, 0.17);
 }
 
 :root[data-theme="light"] .product-frame {
   background:
     radial-gradient(circle at 78% 6%, rgba(130, 215, 25, 0.14), transparent 18rem),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 245, 232, 0.98));
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(241, 251, 224, 0.98));
 }
 
