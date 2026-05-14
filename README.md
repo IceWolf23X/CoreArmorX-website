@@ -1,8 +1,19 @@
 # CoreArmorX Website
 
-Static product website for CoreArmorX.
+Static product website for CoreArmorX, a Paper-only vanilla+ armor progression plugin with netherite visual skins.
 
 The site is built with plain HTML, CSS, JavaScript, and SVG assets.
+
+## Pages
+
+- `index.html`
+- `features.html`
+- `installation.html`
+- `configuration.html`
+- `docs.html`
+- `faq.html`
+
+`configurations.html` redirects to `configuration.html` for compatibility.
 
 ## Local Preview
 
