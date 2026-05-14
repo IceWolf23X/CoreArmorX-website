@@ -45,50 +45,400 @@
 
             <h2 id="config-yml">5. <code>config.yml</code></h2>
             <p>Controls global debug mode, protected vanilla recipe behavior, recipe book discovery, ingredient groups, default upgrade behavior, generated lore, leather color placeholders, inventory model mode, skin removal, fire/lava stripping, progression locks, and custom item protection.</p>
-            <pre class="code-block"><code>recipes:
+            <pre class="code-block"><code># CoreArmorX main configuration.
+#
+# CoreArmorX is designed as a Paper-only vanilla+ armor progression plugin.
+# This file controls global behavior. Recipe definitions live in:
+# - armor-upgrades.yml
+# - armor-skins.yml
+#
+# All text shown to players is configured in messages.yml.
+
+settings:
+  # Enables extra startup/reload diagnostic logs.
+  # Keep false on production unless you are debugging configuration or recipe behavior.
+  debug: false
+
+recipes:
+  # When true, CoreArmorX blocks protected vanilla direct armor recipe outputs at
+  # crafting time and uses progression recipes instead. It does not remove
+  # minecraft:* recipes from the server registry, so reload/disable is safe.
+  # Leather armor and vanilla diamond -&gt; netherite smithing are not touched.
   override-vanilla-equipment-recipes: true
+
+  # Cooldown used by blocked-crafting messages to avoid chat spam.
+  # Value is in server ticks. 20 ticks = 1 second.
+  blocked-message-cooldown-ticks: 40
+
   recipe-book:
+    # Registers static placeholder recipes so players can discover CoreArmorX
+    # recipes naturally in the vanilla recipe book.
     enabled: true
+
+ingredient-groups:
+  # Ingredient groups let upgrade/skin definitions reference a named set instead
+  # of a single Bukkit Material. Runtime matching is MATERIAL_ONLY, so any item
+  # whose Material is listed here can satisfy that ingredient cost.
+  #
+  # The static recipe-book entry still uses the first valid material as the
+  # representative ingredient; the runtime matcher accepts the whole group.
+  COPPER_ARMOR_MATERIALS:
+    - COPPER_INGOT
+
+  # Chainmail uses nuggets by default to keep it as an intermediate vanilla+ step.
+  CHAINMAIL_ARMOR_MATERIALS:
+    - IRON_NUGGET
+
+  IRON_ARMOR_MATERIALS:
+    - IRON_INGOT
+
+  GOLD_ARMOR_MATERIALS:
+    - GOLD_INGOT
+
+  DIAMOND_ARMOR_MATERIALS:
+    - DIAMOND
+
+  TURTLE_HELMET_MATERIALS:
+    - TURTLE_SCUTE
 
 upgrades:
+  # Master switch for armor upgrade crafting.
   enabled: true
+
+  # Default cost behavior used when an armor-upgrades.yml entry does not override it.
+  # VANILLA_RECIPE_COST means helmet 5, chestplate 8, leggings 7, boots 4.
   cost-mode: VANILLA_RECIPE_COST
+
+  # Durability behavior after an upgrade:
+  # - REFILL: output item is fully repaired.
+  # - KEEP_DAMAGE: preserves the exact damage value when possible.
+  # - KEEP_PERCENTAGE: preserves the percentage of durability already used.
   durability-mode: REFILL
 
+  # When true, anvil repair cost is preserved by Bukkit/Paper meta conversion
+  # whenever the target item supports it. When false, upgrade output repair cost
+  # is cleared.
+  preserve-repair-cost: true
+
 skins:
+  # Master switch for visual skin recipes.
   enabled: true
+
+  # V1 skin crafting is intentionally fixed to clean netherite armor in a
+  # vanilla crafting table. Already-skinned items must be stripped first.
+
   lore:
+    # Adds generated CoreArmorX lore lines that identify the active visual skin.
+    # CoreArmorX snapshots the original item lore into PDC before rebuilding
+    # the final lore from generated-lines.
     enabled: true
+
+    # Legacy single-line format. Used only if generated-lines is empty.
+    format: "&lt;reset&gt;&lt;gray&gt;Skin: &lt;white&gt;{skin}"
+
+    # MiniMessage lines rendered from current config every time the item is
+    # refreshed, dyed, fixed, or skin durability changes.
+    # The final item lore is exactly this list after placeholder expansion.
+    # To display the saved original item lore, add a line that is exactly
+    # {item_lore}. If this line is missing, the saved original lore remains in
+    # PDC for skin removal/reset, but is not shown on the skinned item.
+    #
+    # Available placeholders:
+    # - {item_lore}: must be its own list entry; expands to the saved original lore
+    # - {skin}
+    # - {skin_id}
+    # - {real_tier}
+    # - {visual_skin}
+    # - {clean_material}
+    # - {leather_color}: readable hex, same as {leather_color_hex}
+    # - {leather_color_hex}: readable #RRGGBB value
+    # - {leather_color_rgb}: readable R,G,B value
+    # - {leather_color_square}: ready-to-render colored square MiniMessage
+    # - {leather_color_minimessage}: MiniMessage color tag, for example &lt;#A06540&gt;
+    # - {leather_color_name}: nearest readable color name
+    # - {skin_durability_current}
+    # - {skin_durability_max}
+    # - {skin_durability_damage}
+    # - {skin_durability_remaining}
+    # - {skin_durability_percent}
+    # - {skin_durability_bar}
     generated-lines:
       - "{item_lore}"
       - "&lt;gray&gt;Skin: &lt;white&gt;{skin}"
+      # Example durability line. Uncomment it when skin-durability is enabled
+      # in armor-skins.yml and you want the skin durability shown in lore.
+      # - "&lt;gray&gt;Skin Durability: &lt;white&gt;{skin_durability_current}&lt;/white&gt;/&lt;white&gt;{skin_durability_max}&lt;/white&gt; {skin_durability_bar}"
+
+  leather-color:
+    # Enables leather color placeholders for leather-skinned armor.
+    # If false, all leather color placeholders render as empty strings.
+    placeholders: true
+
+    # Character used by {leather_color_square}. It is rendered with the item's
+    # leather color through MiniMessage.
+    square-character: "\u25A0"
+
+    default-color:
+      # LEATHER_DEFAULT uses vanilla leather default color when no leather meta
+      # is available. CUSTOM_HEX uses custom-hex instead.
+      mode: LEATHER_DEFAULT
+      custom-hex: "#A06540"
+
+armor-skins:
+  inventory-model:
+    # REAL_TIER makes skinned netherite armor look like netherite in inventory
+    # while keeping the visual skin when equipped.
+    #
+    # VISUAL_SKIN disables that inventory override and shows the visual Material
+    # icon in the inventory.
+    mode: REAL_TIER
 
 skin-removal:
+  # Master switch for removing a skin through crafting.
   enabled: true
+
+  # Tool required in the crafting matrix with a skinned armor piece.
+  # If damage-tool is true and consume-tool is false, this material must have
+  # durability. Otherwise removal recipes are skipped and a config warning is logged.
   tool: SHEARS
+
+  # If true, one shears item is consumed.
   consume-tool: false
+
+  # If true, shears take durability damage instead of being consumed.
   damage-tool: true
 
+  # Durability damage applied to shears when damage-tool is true.
+  damage-amount: 1
+
+skin-stripping:
+  # If false, dropped skinned armor is protected from configured fire/lava
+  # destruction causes and keeps the skin.
+  #
+  # If true, configured causes strip the skin and convert the item back into
+  # clean netherite instead of destroying it.
+  enabled: false
+
+  # Supported v1 causes:
+  # - LAVA
+  # - FIRE
+  causes:
+    - LAVA
+    - FIRE
+
+  # MVP supports STRIP_SKIN only.
+  mode: STRIP_SKIN
+
 progression-locks:
-  enabled: false</code></pre>
+  # Master switch for permission-based progression locks.
+  # CoreArmorX does not store progression state internally.
+  enabled: false
+
+  blocks:
+    # Blocks protected direct crafting/skin recipes when permission checks fail.
+    crafting: true
+
+    # Blocks armor upgrade recipes when permission checks fail.
+    upgrades: true
+
+    # Default false: found/traded/given armor remains usable.
+    # If true, equipping/using armor requires corearmorx.use.&lt;tier&gt;.
+    usage: false
+
+  permissions:
+    # Players with this permission bypass all CoreArmorX progression checks.
+    bypass: "corearmorx.progression.bypass"
+
+    # Prefix used when usage locking is enabled.
+    # Example: corearmorx.use.netherite
+    usage-prefix: "corearmorx.use"
+
+compatibility:
+  custom-items:
+    # Custom item protection mode:
+    # - BLOCK_IF_DETECTED: block transformation if foreign PDC data is found.
+    # - REPLACE_ANYWAY: allow CoreArmorX transformations even when foreign PDC
+    #   data is present. Use only when you know those custom items are safe.
+    behavior: BLOCK_IF_DETECTED
+</code></pre>
             <p><code>{item_lore}</code> must be its own generated lore entry. If it is missing, original lore remains stored in PDC but is not displayed.</p>
 
             <h2 id="armor-upgrades-yml">6. <code>armor-upgrades.yml</code></h2>
             <p>Defines normal armor progression recipes and special one-piece endpoint recipes. Supported fields include <code>enabled</code>, <code>from-tier</code>, <code>from-material</code>, <code>to-tier</code>, <code>to-material</code>, <code>ingredient</code>, <code>cost-mode</code>, <code>count</code>, and <code>permission</code>.</p>
-            <pre class="code-block"><code>upgrades:
+            <pre class="code-block"><code># CoreArmorX armor upgrade definitions.
+#
+# These recipes change the real armor tier. They do not write CoreArmorX PDC
+# on normal upgraded items.
+#
+# Supported fields:
+# - enabled: true/false
+# - from-tier: LEATHER, COPPER, CHAINMAIL, IRON, GOLD, DIAMOND, NETHERITE
+# - from-material: exact Bukkit Material, used for special one-piece recipes
+# - to-tier: target tier for normal four-piece armor sets
+# - to-material: exact Bukkit Material, used for special one-piece recipes
+# - ingredient: Bukkit Material or ingredient-groups.&lt;id&gt; from config.yml
+# - cost-mode: VANILLA_RECIPE_COST or CUSTOM
+# - count: explicit ingredient count, used only when cost-mode is CUSTOM
+# - permission: permission required when progression locks are enabled
+#
+# VANILLA_RECIPE_COST means:
+# - helmet: 5
+# - chestplate: 8
+# - leggings: 7
+# - boots: 4
+
+upgrades:
   leather_to_copper:
+    # First progression step after vanilla leather armor.
     enabled: true
     from-tier: LEATHER
     to-tier: COPPER
     ingredient: COPPER_ARMOR_MATERIALS
     cost-mode: VANILLA_RECIPE_COST
-    permission: "corearmorx.upgrade.leather_to_copper"</code></pre>
+    permission: "corearmorx.upgrade.leather_to_copper"
+
+  copper_to_chainmail:
+    # Uses iron nuggets so chainmail feels like an intermediate vanilla+ tier.
+    enabled: true
+    from-tier: COPPER
+    to-tier: CHAINMAIL
+    ingredient: CHAINMAIL_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.copper_to_chainmail"
+
+  chainmail_to_iron:
+    # Converts chainmail into iron using the normal armor-piece material counts.
+    enabled: true
+    from-tier: CHAINMAIL
+    to-tier: IRON
+    ingredient: IRON_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.chainmail_to_iron"
+
+  iron_to_gold:
+    # Optional alternate progression branch from iron to gold.
+    enabled: true
+    from-tier: IRON
+    to-tier: GOLD
+    ingredient: GOLD_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.iron_to_gold"
+
+  iron_to_diamond:
+    # Main progression path from iron to diamond.
+    # Diamond -&gt; netherite remains vanilla smithing and is not handled here.
+    enabled: true
+    from-tier: IRON
+    to-tier: DIAMOND
+    ingredient: DIAMOND_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.iron_to_diamond"
+
+  iron_helmet_to_turtle:
+    # Special helmet-only progression branch.
+    # Uses exact materials so this does not create recipes for other armor pieces.
+    enabled: true
+    from-material: IRON_HELMET
+    to-material: TURTLE_HELMET
+    ingredient: TURTLE_HELMET_MATERIALS
+    count: 5
+    permission: "corearmorx.upgrade.iron_helmet_to_turtle"
+</code></pre>
             <p>The default armor cost model is helmet 5, chestplate 8, leggings 7, boots 4.</p>
 
             <h2 id="armor-skins-yml">7. <code>armor-skins.yml</code></h2>
             <p>Defines netherite-only visual skin recipes, maps output materials, and controls optional skin durability. Default skin ids are leather, copper, chainmail, iron, gold, and diamond.</p>
-            <pre class="code-block"><code>skins:
+            <pre class="code-block"><code># CoreArmorX netherite skin definitions.
+#
+# Skin recipes are netherite-only. A skin changes the real Material to the
+# configured output material while CoreArmorX applies netherite-equivalent
+# durability, attributes, fire resistance, and PDC identity.
+#
+# Supported fields:
+# - enabled: true/false
+# - display-name: name used in generated lore and messages
+# - ingredient: Bukkit Material or ingredient-groups.&lt;id&gt; from config.yml
+# - cost-mode: VANILLA_RECIPE_COST or CUSTOM
+# - count: explicit ingredient count, used only when cost-mode is CUSTOM
+# - dyeable: true only for leather skin
+# - permission: permission required when progression locks are enabled
+# - output-materials: visual output Material per armor piece
+#
+# VANILLA_RECIPE_COST means:
+# - helmet: 5
+# - chestplate: 8
+# - leggings: 7
+# - boots: 4
+
+skins:
+  leather:
+    # Dyeable visual skin. Vanilla leather dye recipes should keep CoreArmorX data.
+    enabled: true
+    display-name: "Leather"
+    ingredient: LEATHER
+    cost-mode: VANILLA_RECIPE_COST
+    dyeable: true
+    permission: "corearmorx.skin.leather"
+    output-materials:
+      helmet: LEATHER_HELMET
+      chestplate: LEATHER_CHESTPLATE
+      leggings: LEATHER_LEGGINGS
+      boots: LEATHER_BOOTS
+
+  copper:
+    # Copper visual skin. Requires Paper/Minecraft versions with copper armor.
+    enabled: true
+    display-name: "Copper"
+    ingredient: COPPER_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.copper"
+    output-materials:
+      helmet: COPPER_HELMET
+      chestplate: COPPER_CHESTPLATE
+      leggings: COPPER_LEGGINGS
+      boots: COPPER_BOOTS
+
+  chainmail:
+    # Chainmail visual skin, using iron nuggets as the material cost.
+    enabled: true
+    display-name: "Chainmail"
+    ingredient: CHAINMAIL_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.chainmail"
+    output-materials:
+      helmet: CHAINMAIL_HELMET
+      chestplate: CHAINMAIL_CHESTPLATE
+      leggings: CHAINMAIL_LEGGINGS
+      boots: CHAINMAIL_BOOTS
+
+  iron:
+    # Iron visual skin.
+    enabled: true
+    display-name: "Iron"
+    ingredient: IRON_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.iron"
+    output-materials:
+      helmet: IRON_HELMET
+      chestplate: IRON_CHESTPLATE
+      leggings: IRON_LEGGINGS
+      boots: IRON_BOOTS
+
+  gold:
+    # Gold visual skin. CoreArmorX does not add custom piglin logic in v1.
+    enabled: true
+    display-name: "Gold"
+    ingredient: GOLD_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.gold"
+    output-materials:
+      helmet: GOLDEN_HELMET
+      chestplate: GOLDEN_CHESTPLATE
+      leggings: GOLDEN_LEGGINGS
+      boots: GOLDEN_BOOTS
+
   diamond:
+    # Diamond visual skin. This does not affect vanilla diamond -&gt; netherite smithing.
     enabled: true
     display-name: "Diamond"
     ingredient: DIAMOND_ARMOR_MATERIALS
@@ -101,26 +451,310 @@ progression-locks:
       boots: DIAMOND_BOOTS
 
 skin-durability:
+  # Skin durability is stored in CoreArmorX PDC and applies only to skinned
+  # armor. It does not replace vanilla DAMAGE/MAX_DAMAGE on the real item.
+  #
+  # Supported v1 modes:
+  # - DISABLED: no skin durability is tracked.
+  # - GLOBAL: every skin uses global.max-durability.
+  # - BY_SKIN: each skin reads by-skin.materials.&lt;skin&gt;, then fallback values.
+  # - BY_ITEM: each piece reads by-item.materials.&lt;skin&gt;.&lt;piece&gt;, then fallback values.
   mode: DISABLED
+
+  global:
+    # Used only when mode is GLOBAL.
+    # Every skinned armor item receives this same skin max durability.
+    max-durability: 5000
+
+  by-skin:
+    # Used when mode is BY_SKIN and as a fallback for BY_ITEM.
+    # If a skin material is missing below, CoreArmorX uses default-max-durability.
+    default-max-durability: 5000
+
+    materials:
+      # Skin max durability per visual skin material.
+      leather: 6000
+      copper: 5000
+      chainmail: 5500
+      iron: 7000
+      gold: 2500
+      diamond: 9000
+
+  by-item:
+    # Used only when mode is BY_ITEM.
+    # Missing piece values fall back to the material default, then BY_SKIN,
+    # then this default-max-durability.
+    default-max-durability: 5000
+
+    materials:
+      leather:
+        # Fallback for leather pieces not listed below.
+        default-max-durability: 6000
+        helmet: 1800
+        chestplate: 3200
+        leggings: 2800
+        boots: 1500
+
+      copper:
+        default-max-durability: 5000
+        helmet: 1500
+        chestplate: 2700
+        leggings: 2300
+        boots: 1250
+
+      chainmail:
+        default-max-durability: 5500
+        helmet: 1650
+        chestplate: 2930
+        leggings: 2570
+        boots: 1380
+
+      iron:
+        default-max-durability: 7000
+        helmet: 2100
+        chestplate: 3730
+        leggings: 3270
+        boots: 1750
+
+      gold:
+        default-max-durability: 2500
+        helmet: 750
+        chestplate: 1330
+        leggings: 1170
+        boots: 630
+
+      diamond:
+        default-max-durability: 9000
+        helmet: 2700
+        chestplate: 4800
+        leggings: 4200
+        boots: 2250
+
   damage:
+    # Supported v1 mode: MIRROR_REAL_DAMAGE.
+    # When the real armor takes durability damage, skin damage increases by the
+    # same amount multiplied by multiplier.
     mode: MIRROR_REAL_DAMAGE
     multiplier: 1.0
-  on-break: REMOVE_SKIN</code></pre>
+
+  # Supported v1 action: REMOVE_SKIN.
+  # When skin damage reaches max, the skin is stripped and the armor returns
+  # to its clean netherite Material. Materials are not refunded.
+  on-break: REMOVE_SKIN
+
+  mending:
+    # Supported v1 modes:
+    # - DISABLED: CoreArmorX does not touch mending.
+    # - SPLIT: odd repair points go to the real item, the rest repairs the skin.
+    # - DOUBLE: vanilla repair remains unchanged and the skin repairs by the
+    #   same amount. Recommended when damage mode is MIRROR_REAL_DAMAGE.
+    mode: DISABLED
+
+  placeholders:
+    # Value inserted into durability placeholders when skin durability is
+    # disabled or missing on the inspected item.
+    disabled-value: ""
+
+    # Basic MiniMessage bar fragments used by {skin_durability_bar}.
+    # Include color tags here because the renderer does not hardcode colors.
+    bar-segments: 10
+    bar-full: "&lt;green&gt;|"
+    bar-empty: "&lt;dark_gray&gt;|"
+</code></pre>
             <p>Skin durability modes are <code>DISABLED</code>, <code>GLOBAL</code>, <code>BY_SKIN</code>, and <code>BY_ITEM</code>. Mending modes are <code>DISABLED</code>, <code>SPLIT</code>, and <code>DOUBLE</code>.</p>
 
             <h2 id="messages-yml">8. <code>messages.yml</code></h2>
             <p>Messages use Adventure MiniMessage. The configured prefix is prepended automatically. Only documented placeholders near each message should be used.</p>
             <p>Inspect messages are useful for checking current material, clean material, visual skin, inventory model mode, CoreArmorX data, generated lore state, original lore snapshot, skin durability, leather color, tier, and armor piece.</p>
+            <pre class="code-block"><code># CoreArmorX messages.
+#
+# All user-facing text should live here.
+# Messages use Adventure MiniMessage syntax:
+# https://docs.advntr.dev/minimessage/format.html
+#
+# Placeholder format is {placeholder}. A message only receives placeholders
+# that are meaningful for that specific command or event.
+
+# Prefix is prepended automatically by MessageService to every configured message.
+prefix: "&lt;dark_gray&gt;[&lt;aqua&gt;CoreArmorX&lt;/aqua&gt;]&lt;/dark_gray&gt; "
+
+commands:
+  # Generic permission failure for commands.
+  no-permission: "&lt;red&gt;You do not have permission to do this."
+
+  # Sent when an unknown /corearmorx subcommand is used.
+  unknown: "&lt;red&gt;Unknown command. Use &lt;white&gt;/corearmorx help&lt;/white&gt;."
+
+  # Sent after /corearmorx reload successfully reloads configs and recipes.
+  reloaded: "&lt;green&gt;CoreArmorX reloaded."
+
+  # Placeholder:
+  # - {version}: plugin version from plugin.yml
+  version: "&lt;gray&gt;CoreArmorX version &lt;white&gt;{version}&lt;/white&gt;."
+
+  # Help command lines. Permission-gated lines are only shown when the sender
+  # has the corresponding permission.
+  help-header: "&lt;gray&gt;CoreArmorX commands:"
+  help-version: "&lt;dark_gray&gt;- &lt;aqua&gt;/corearmorx version&lt;/aqua&gt;"
+  help-reload: "&lt;dark_gray&gt;- &lt;aqua&gt;/corearmorx reload&lt;/aqua&gt;"
+  help-inspect: "&lt;dark_gray&gt;- &lt;aqua&gt;/corearmorx inspect&lt;/aqua&gt;"
+  help-fixitem: "&lt;dark_gray&gt;- &lt;aqua&gt;/corearmorx fixitem&lt;/aqua&gt;"
+
+  # Sent when a player-only command is run from console.
+  player-only: "&lt;red&gt;This command can only be used by a player."
+
+crafting:
+  # Sent when a protected vanilla armor recipe is blocked.
+  blocked-vanilla-craft: "&lt;red&gt;You must upgrade the previous armor tier first."
+
+  # Sent when permission-based progression blocks an upgrade or skin recipe.
+  no-permission: "&lt;red&gt;You do not have permission for this armor progression."
+
+  # Sent when compatibility mode blocks transformation of a detected custom item.
+  custom-item-blocked: "&lt;red&gt;This custom item cannot be modified by CoreArmorX."
+
+progression:
+  # Sent when progression-locks.blocks.usage is true and the player lacks
+  # the required corearmorx.use.&lt;tier&gt; permission.
+  usage-blocked: "&lt;red&gt;You do not have permission to use this armor tier."
+
+admin:
+  # Sent by /corearmorx inspect when the player has no held item.
+  inspect-empty-hand: "&lt;red&gt;Hold an armor item first."
+
+  # Sent by /corearmorx fixitem when the player has no held item.
+  fix-empty-hand: "&lt;red&gt;Hold an armor item first."
+
+  # Sent by /corearmorx fixitem when the held item is not CoreArmorX skinned armor.
+  fix-not-skinned: "&lt;red&gt;This item is not a CoreArmorX skinned armor item."
+
+  # Sent by /corearmorx fixitem after the profile/lore/PDC refresh completes.
+  fixed: "&lt;green&gt;Item fixed."
+
+  inspect:
+    # Header for /corearmorx inspect output.
+    header: "&lt;gray&gt;Item inspection:"
+
+    # Placeholder:
+    # - {material}: current Bukkit Material name
+    current-material: "&lt;dark_gray&gt;- &lt;gray&gt;Current Material: &lt;white&gt;{material}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {material}: saved clean netherite Material for skinned armor
+    clean-material: "&lt;dark_gray&gt;- &lt;gray&gt;Clean Material: &lt;white&gt;{material}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {skin}: saved visual skin tier
+    visual-skin: "&lt;dark_gray&gt;- &lt;gray&gt;Visual Skin: &lt;white&gt;{skin}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {mode}: REAL_TIER or VISUAL_SKIN
+    inventory-model-mode: "&lt;dark_gray&gt;- &lt;gray&gt;Inventory Model Mode: &lt;white&gt;{mode}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {value}: true/false
+    has-core-data: "&lt;dark_gray&gt;- &lt;gray&gt;Has CoreArmorX Data: &lt;white&gt;{value}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {value}: true/false
+    generated-lore: "&lt;dark_gray&gt;- &lt;gray&gt;Generated Skin Lore: &lt;white&gt;{value}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {value}: true/false
+    original-lore: "&lt;dark_gray&gt;- &lt;gray&gt;Original Lore Snapshot: &lt;white&gt;{value}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {damage}: skin durability damage stored in PDC
+    # - {max}: skin max durability stored in PDC
+    # - {remaining}: max minus damage
+    # - {percent}: remaining percent
+    skin-durability: "&lt;dark_gray&gt;- &lt;gray&gt;Skin Durability: &lt;white&gt;{remaining}&lt;/white&gt;/&lt;white&gt;{max}&lt;/white&gt; &lt;dark_gray&gt;({percent}%, damage {damage})"
+
+    # Sent when skin durability mode is disabled or the item has no skin
+    # durability PDC.
+    skin-durability-disabled: "&lt;dark_gray&gt;- &lt;gray&gt;Skin Durability: &lt;white&gt;disabled&lt;/white&gt;"
+
+    # Placeholder:
+    # - {color}: leather color as #RRGGBB
+    leather-color: "&lt;dark_gray&gt;- &lt;gray&gt;Leather Color: &lt;white&gt;{color}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {tier}: detected armor tier for normal armor
+    tier: "&lt;dark_gray&gt;- &lt;gray&gt;Tier: &lt;white&gt;{tier}&lt;/white&gt;"
+
+    # Placeholder:
+    # - {piece}: detected armor piece for normal armor
+    piece: "&lt;dark_gray&gt;- &lt;gray&gt;Piece: &lt;white&gt;{piece}&lt;/white&gt;"
+</code></pre>
 
             <h2 id="plugin-yml">9. <code>plugin.yml</code></h2>
             <pre class="code-block"><code>name: CoreArmorX
 main: it.icewolf23x.corearmorx.CoreArmorXPlugin
+version: ${project.version}
 api-version: '1.21'
 description: Vanilla+ armor progression and netherite armor skins for Paper.
+author: IceWolf23X
+prefix: CoreArmorX
 commands:
   corearmorx:
+    description: CoreArmorX main command.
+    usage: /corearmorx
     aliases:
-      - cax</code></pre>
+      - cax
+permissions:
+  corearmorx.admin:
+    description: Grants all CoreArmorX admin permissions.
+    default: op
+    children:
+      corearmorx.admin.reload: true
+      corearmorx.admin.inspect: true
+      corearmorx.admin.fixitem: true
+      corearmorx.progression.bypass: true
+  corearmorx.admin.reload:
+    description: Allows reloading CoreArmorX configuration.
+    default: op
+  corearmorx.admin.inspect:
+    description: Allows inspecting held CoreArmorX armor items.
+    default: op
+  corearmorx.admin.fixitem:
+    description: Allows repairing CoreArmorX metadata/profile on the held item.
+    default: op
+  corearmorx.progression.bypass:
+    description: Bypasses CoreArmorX permission progression locks.
+    default: op
+  corearmorx.skin.*:
+    description: Allows every CoreArmorX armor skin.
+    default: op
+    children:
+      corearmorx.skin.leather: true
+      corearmorx.skin.copper: true
+      corearmorx.skin.chainmail: true
+      corearmorx.skin.iron: true
+      corearmorx.skin.gold: true
+      corearmorx.skin.diamond: true
+  corearmorx.upgrade.*:
+    description: Allows every CoreArmorX armor upgrade.
+    default: op
+    children:
+      corearmorx.upgrade.leather_to_copper: true
+      corearmorx.upgrade.copper_to_chainmail: true
+      corearmorx.upgrade.chainmail_to_iron: true
+      corearmorx.upgrade.iron_to_gold: true
+      corearmorx.upgrade.iron_to_diamond: true
+      corearmorx.upgrade.iron_helmet_to_turtle: true
+  corearmorx.use.*:
+    description: Allows using every CoreArmorX armor tier when usage locks are enabled.
+    default: op
+    children:
+      corearmorx.use.leather: true
+      corearmorx.use.copper: true
+      corearmorx.use.chainmail: true
+      corearmorx.use.iron: true
+      corearmorx.use.gold: true
+      corearmorx.use.diamond: true
+      corearmorx.use.netherite: true
+      corearmorx.use.turtle: true
+</code></pre>
 
             <h2 id="permissions">10. Permissions</h2>
             <pre class="code-block"><code>corearmorx.admin
