@@ -43,7 +43,7 @@ progression-locks:
     upgrades: true
     usage: false</code></pre>
             <h3>Edit Files in This Order</h3>
-            <ol><li>Use <code>config.yml</code> for global behavior such as vanilla recipe blocking, lore, skin removal, progression locks, and custom item protection.</li><li>Use <code>armor-upgrades.yml</code> to change the real armor progression path, ingredient cost, and upgrade permission nodes.</li><li>Use <code>armor-skins.yml</code> to enable or disable netherite visual skins, change skin ingredients, and configure optional skin durability.</li><li>Use <code>messages.yml</code> last, after behavior is working, to adjust player-facing text.</li></ol>
+            <ol><li>Use <code>config.yml</code> for global behavior such as vanilla recipe override, lore, skin removal, progression locks, and custom item protection.</li><li>Use <code>armor-upgrades.yml</code> to change the real armor progression path, ingredient cost, and upgrade permission nodes.</li><li>Use <code>armor-skins.yml</code> to enable or disable netherite visual skins, change skin ingredients, and configure optional skin durability.</li><li>Use <code>messages.yml</code> last, after behavior is working, to adjust player-facing text.</li></ol>
             <h3>First In-Game Test Route</h3>
             <ol><li>Craft one normal upgrade with the armor item and ingredient materials in separate one-item slots.</li><li>Craft one netherite visual skin.</li><li>Remove one skin with shears.</li><li>Use <code>/corearmorx inspect</code> while holding the skinned item.</li><li>Use a non-op test account before enabling progression locks on a public server.</li></ol>
 
@@ -85,9 +85,10 @@ settings:
   debug: false
 
 recipes:
-  # When true, CoreArmorX blocks protected vanilla direct armor recipe outputs at
-  # crafting time and uses progression recipes instead. It does not remove
-  # minecraft:* recipes from the server registry, so reload/disable is safe.
+  # When true, CoreArmorX replaces protected vanilla direct armor recipes in the
+  # minecraft:* registry with progression recipes, so players must upgrade from
+  # the previous tier. Original vanilla recipes are restored when the override is
+  # disabled or the plugin is disabled.
   # Leather armor and vanilla diamond -&gt; netherite smithing are not touched.
   override-vanilla-equipment-recipes: true
 
