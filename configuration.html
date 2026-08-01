@@ -1,37 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CoreArmorX configuration reference and first setup guide for YAML files, reload boundaries, starter permissions, recipes, runtime behavior, and troubleshooting.">
-    <title>CoreArmorX Configuration Reference</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="./assets/corearmorx-logo.svg">
-    <meta name="theme-color" content="#071008">
-    <script>(()=>{try{if(localStorage.getItem("corearmorx-theme")==="light"){document.documentElement.dataset.theme="light";}}catch(_){}})();</script>
-    <link rel="stylesheet" href="./assets/styles.css">
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header"><nav class="nav shell" aria-label="Main navigation"><a class="brand" href="./index.html" aria-label="CoreArmorX home"><span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span><span class="brand-text">CoreArmorX</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="./features.html">Features</a><a href="./installation.html">Setup</a><a href="./docs.html">Docs</a><a href="./faq.html">FAQ</a><a href="https://github.com/IceWolf23X/CoreArmorX-issues">GitHub</a></div><div class="nav-actions"><a class="nav-cta nav-download" href="./installation.html#download">Download</a><a class="nav-cta" href="./installation.html">Get Started</a><a class="nav-cta" href="https://buymeacoffee.com/lcewolf23x">Buy Me a Coffee</a></div></nav></header>
-    <main id="main">
-      <section class="page-hero"><div class="shell section-heading"><p class="eyebrow">Complete Configuration Reference</p><h1>Configuration Reference</h1><p>Current CoreArmorX YAML files, first setup path, reload boundaries, runtime model, permissions, troubleshooting, and production checks.</p></div></section>
-      <section class="section doc-page">
-        <div class="shell doc-layout">
-          <aside class="doc-sidebar" aria-label="Page contents"><strong>Contents</strong><a href="#before-you-configure">0. Before You Configure</a><a href="#starter-setup-path">1. Starter Setup Path</a><a href="#file-layout">2. File Layout</a><a href="#reload-vs-restart">3. Reload vs Restart</a><a href="#clean-setup">4. Clean Setup</a><a href="#runtime-model">5. Runtime Model</a><a href="#config-yml">6. config.yml</a><a href="#armor-upgrades-yml">7. armor-upgrades.yml</a><a href="#armor-skins-yml">8. armor-skins.yml</a><a href="#messages-yml">9. messages.yml</a><a href="#plugin-yml">10. plugin.yml</a><a href="#permissions">11. Permissions</a><a href="#troubleshooting-quick-reference">12. Troubleshooting</a><a href="#production-validation-checklist">13. Production Checklist</a></aside>
-          <article class="markdown-body">
-            <h2 id="before-you-configure">0. Before You Configure</h2>
-            <p>Minimum requirements are Paper 1.21.11+, Java 21+, CoreArmorX installed on a Paper server, and a permission plugin only if progression locks are enabled.</p>
-            <p>Default behavior is conservative: progression locks, skin durability, and fire/lava stripping are disabled by default, and foreign custom item transformations are blocked when detected.</p>
-            <p>For a first install, start with the packaged defaults and confirm the plugin works before changing recipe paths or permission rules. CoreArmorX does not create a player database, does not require an economy plugin, and does not need a resource pack.</p>
+<!DOCTYPE html>
 
-            <h2 id="starter-setup-path">1. Starter Setup Path</h2>
-            <p>This is the recommended order for a server owner who is installing CoreArmorX for the first time.</p>
-            <h3>Start With Defaults</h3>
-            <ol><li>Stop the Paper server.</li><li>Place the CoreArmorX jar in the server <code>plugins</code> folder.</li><li>Start the server once and confirm CoreArmorX enables in console.</li><li>Open the generated <code>plugins/CoreArmorX/</code> folder.</li><li>Run <code>/corearmorx version</code> in game or console to confirm the loaded build.</li></ol>
-            <h3>Choose an Access Model</h3>
-            <ul><li>Use open progression if every player should be able to craft the configured upgrades and skins.</li><li>Use permission-gated progression if ranks, quests, seasons, or staff rules decide who can craft upgrades or skins.</li><li>Enable usage locks only after crafting locks are tested, because usage locks can also stop players from equipping configured armor tiers.</li></ul>
-            <pre class="code-block"><code># Simple first setup: all configured recipes are usable.
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="CoreArmorX configuration reference and first setup guide for YAML files, reload boundaries, starter permissions, recipes, runtime behavior, and troubleshooting." name="description"/>
+<title>CoreArmorX Configuration Reference</title>
+<link href="./assets/corearmorx-logo.svg" rel="icon" type="image/svg+xml"/>
+<link href="./assets/corearmorx-logo.svg" rel="shortcut icon" type="image/svg+xml"/>
+<meta content="#2F3235" name="theme-color"/>
+<link href="./assets/vendor/framebasecss/framebase.min.css" rel="stylesheet"/><link href="./assets/vendor/framebasecss/framebase-highlight.min.css" rel="stylesheet"/><link href="./assets/styles.css" rel="stylesheet"/></head>
+<body>
+<a class="fb-skip-link" href="#main">Skip to content</a>
+<header class="fb-site-header fb-site-header--sticky">
+<div class="fb-container fb-container--wide fb-navbar">
+<a aria-label="CoreArmorX home" class="fb-brand corex-brand" href="./index.html">
+<img alt="" height="36" src="./assets/corearmorx-logo.svg" width="36"/><span>CoreArmorX</span>
+</a>
+<button aria-controls="site-navigation" aria-expanded="false" class="fb-button fb-button--ghost fb-nav-toggle" data-nav-toggle="" type="button">Menu</button>
+<nav aria-label="Main navigation" class="fb-nav-panel fb-nav-region" data-nav-panel="" data-open="false" id="site-navigation">
+<ul class="fb-nav"><li><a href="./index.html">Overview</a></li><li><a href="./features.html">Features</a></li><li><a href="./installation.html">Setup</a></li><li><a href="./docs.html">Documentation</a></li><li><a href="./faq.html">FAQ</a></li><li><a href="https://github.com/IceWolf23X/CoreArmorX-issues" rel="noopener noreferrer" target="_blank">GitHub</a></li><li><a href="./installation.html#download">Download</a></li></ul>
+</nav>
+</div>
+</header>
+<main class="fb-main" id="main">
+<header class="fb-doc-header corex-page-hero"><div class="fb-container fb-container--wide"><p class="fb-eyebrow">Complete Configuration Reference</p><h1>Configuration Reference</h1><p>Current CoreArmorX YAML files, first setup path, reload boundaries, runtime model, permissions, troubleshooting, and production checks.</p></div></header>
+<section class="fb-section">
+<div class="fb-container fb-container--wide fb-doc-shell corex-doc-shell">
+<aside aria-label="Page contents" class="fb-doc-sidebar fb-doc-nav-panel corex-toc"><strong>Contents</strong><a href="#before-you-configure">0. Before You Configure</a><a href="#starter-setup-path">1. Starter Setup Path</a><a href="#file-layout">2. File Layout</a><a href="#reload-vs-restart">3. Reload vs Restart</a><a href="#clean-setup">4. Clean Setup</a><a href="#runtime-model">5. Runtime Model</a><a href="#config-yml">6. config.yml</a><a href="#armor-upgrades-yml">7. armor-upgrades.yml</a><a href="#armor-skins-yml">8. armor-skins.yml</a><a href="#messages-yml">9. messages.yml</a><a href="#plugin-yml">10. plugin.yml</a><a href="#permissions">11. Permissions</a><a href="#troubleshooting-quick-reference">12. Troubleshooting</a><a href="#production-validation-checklist">13. Production Checklist</a></aside>
+<article class="fb-doc-main fb-doc-content">
+<h2 id="before-you-configure">0. Before You Configure</h2>
+<p>Minimum requirements are Paper 1.21.11+, Java 21+, CoreArmorX installed on a Paper server, and a permission plugin only if progression locks are enabled.</p>
+<p>Default behavior is conservative: progression locks, skin durability, and fire/lava stripping are disabled by default, and foreign custom item transformations are blocked when detected.</p>
+<p>For a first install, start with the packaged defaults and confirm the plugin works before changing recipe paths or permission rules. CoreArmorX does not create a player database, does not require an economy plugin, and does not need a resource pack.</p>
+<h2 id="starter-setup-path">1. Starter Setup Path</h2>
+<p>This is the recommended order for a server owner who is installing CoreArmorX for the first time.</p>
+<h3>Start With Defaults</h3>
+<ol><li>Stop the Paper server.</li><li>Place the CoreArmorX jar in the server <code>plugins</code> folder.</li><li>Start the server once and confirm CoreArmorX enables in console.</li><li>Open the generated <code>plugins/CoreArmorX/</code> folder.</li><li>Run <code>/corearmorx version</code> in game or console to confirm the loaded build.</li></ol>
+<h3>Choose an Access Model</h3>
+<ul><li>Use open progression if every player should be able to craft the configured upgrades and skins.</li><li>Use permission-gated progression if ranks, quests, seasons, or staff rules decide who can craft upgrades or skins.</li><li>Enable usage locks only after crafting locks are tested, because usage locks can also stop players from equipping configured armor tiers.</li></ul>
+<div class="fb-code-block"><pre><code class="language-yaml"># Simple first setup: all configured recipes are usable.
 progression-locks:
   enabled: false
 
@@ -41,36 +49,31 @@ progression-locks:
   blocks:
     crafting: true
     upgrades: true
-    usage: false</code></pre>
-            <h3>Edit Files in This Order</h3>
-            <ol><li>Use <code>config.yml</code> for global behavior such as vanilla recipe override, lore, skin removal, progression locks, and custom item protection.</li><li>Use <code>armor-upgrades.yml</code> to change the real armor progression path, ingredient cost, and upgrade permission nodes.</li><li>Use <code>armor-skins.yml</code> to enable or disable netherite visual skins, change skin ingredients, and configure optional skin durability.</li><li>Use <code>messages.yml</code> last, after behavior is working, to adjust player-facing text.</li></ol>
-            <h3>First In-Game Test Route</h3>
-            <ol><li>Craft one normal upgrade with the armor item and ingredient materials in separate one-item slots.</li><li>Craft one netherite visual skin.</li><li>Remove one skin with shears.</li><li>Use <code>/corearmorx inspect</code> while holding the skinned item.</li><li>Use a non-op test account before enabling progression locks on a public server.</li></ol>
-
-            <h2 id="file-layout">2. File Layout</h2>
-            <pre class="code-block"><code>plugins/CoreArmorX/
+    usage: false</code></pre></div>
+<h3>Edit Files in This Order</h3>
+<ol><li>Use <code>config.yml</code> for global behavior such as vanilla recipe override, lore, skin removal, progression locks, and custom item protection.</li><li>Use <code>armor-upgrades.yml</code> to change the real armor progression path, ingredient cost, and upgrade permission nodes.</li><li>Use <code>armor-skins.yml</code> to enable or disable netherite visual skins, change skin ingredients, and configure optional skin durability.</li><li>Use <code>messages.yml</code> last, after behavior is working, to adjust player-facing text.</li></ol>
+<h3>First In-Game Test Route</h3>
+<ol><li>Craft one normal upgrade with the armor item and ingredient materials in separate one-item slots.</li><li>Craft one netherite visual skin.</li><li>Remove one skin with shears.</li><li>Use <code>/corearmorx inspect</code> while holding the skinned item.</li><li>Use a non-op test account before enabling progression locks on a public server.</li></ol>
+<h2 id="file-layout">2. File Layout</h2>
+<div class="fb-code-block"><pre><code class="language-yaml">plugins/CoreArmorX/
   config.yml
   armor-upgrades.yml
   armor-skins.yml
-  messages.yml</code></pre>
-            <p><code>plugin.yml</code> is bundled inside the jar and documents commands, aliases, permissions, and plugin identity.</p>
-
-            <h2 id="reload-vs-restart">3. Reload vs Restart</h2>
-            <p>Use <code>/corearmorx reload</code> for normal YAML edits, recipe changes, message edits, lore template changes, and progression permission node changes in YAML. Restart when replacing the jar, changing Paper/Minecraft version, or recovering from startup-only errors.</p>
-            <p>Existing YAML files are not automatically merged with newly packaged defaults. Compare live files with packaged defaults when updating snapshots.</p>
-
-            <h2 id="clean-setup">4. Clean Setup Checklist</h2>
-            <ul><li>Install the jar and let defaults generate.</li><li>Decide whether to keep <code>recipes.override-vanilla-equipment-recipes: true</code>.</li><li>Configure upgrade and skin permissions only if <code>progression-locks.enabled: true</code>.</li><li>Keep custom item behavior on <code>BLOCK_IF_DETECTED</code> unless conversion is intentional.</li><li>Test recipes with separate one-item ingredient slots.</li></ul>
-            <p>For the first public rollout, change one behavior group at a time and reload between changes. This makes it easier to identify whether an issue comes from recipe definitions, permissions, lore settings, or custom item protection.</p>
-
-            <h2 id="runtime-model">5. Runtime Model</h2>
-            <p>CoreArmorX has two item modes. Normal upgraded armor uses vanilla material as the source of truth and does not receive CoreArmorX PDC. Skinned netherite armor changes material for the visual skin, keeps a netherite-equivalent profile, and stores clean material, skin identity, lore snapshot, model mode, and optional skin durability in PDC.</p>
-            <p>Already-skinned armor cannot be upgraded or skinned again until stripped.</p>
-            <p>If an item is only upgraded from one real tier to another, it should remain clean vanilla armor. If an item is visually skinned, CoreArmorX stores data so it can be inspected, fixed, stripped, and refreshed safely.</p>
-
-            <h2 id="config-yml">6. <code>config.yml</code></h2>
-            <p>Controls global debug mode, protected vanilla recipe behavior, recipe book discovery, ingredient groups, default upgrade behavior, generated lore, leather color placeholders, inventory model mode, skin removal, fire/lava stripping, progression locks, and custom item protection.</p>
-            <pre class="code-block"><code># CoreArmorX main configuration.
+  messages.yml</code></pre></div>
+<p><code>plugin.yml</code> is bundled inside the jar and documents commands, aliases, permissions, and plugin identity.</p>
+<h2 id="reload-vs-restart">3. Reload vs Restart</h2>
+<p>Use <code>/corearmorx reload</code> for normal YAML edits, recipe changes, message edits, lore template changes, and progression permission node changes in YAML. Restart when replacing the jar, changing Paper/Minecraft version, or recovering from startup-only errors.</p>
+<p>Existing YAML files are not automatically merged with newly packaged defaults. Compare live files with packaged defaults when updating snapshots.</p>
+<h2 id="clean-setup">4. Clean Setup Checklist</h2>
+<ul><li>Install the jar and let defaults generate.</li><li>Decide whether to keep <code>recipes.override-vanilla-equipment-recipes: true</code>.</li><li>Configure upgrade and skin permissions only if <code>progression-locks.enabled: true</code>.</li><li>Keep custom item behavior on <code>BLOCK_IF_DETECTED</code> unless conversion is intentional.</li><li>Test recipes with separate one-item ingredient slots.</li></ul>
+<p>For the first public rollout, change one behavior group at a time and reload between changes. This makes it easier to identify whether an issue comes from recipe definitions, permissions, lore settings, or custom item protection.</p>
+<h2 id="runtime-model">5. Runtime Model</h2>
+<p>CoreArmorX has two item modes. Normal upgraded armor uses vanilla material as the source of truth and does not receive CoreArmorX PDC. Skinned netherite armor changes material for the visual skin, keeps a netherite-equivalent profile, and stores clean material, skin identity, lore snapshot, model mode, and optional skin durability in PDC.</p>
+<p>Already-skinned armor cannot be upgraded or skinned again until stripped.</p>
+<p>If an item is only upgraded from one real tier to another, it should remain clean vanilla armor. If an item is visually skinned, CoreArmorX stores data so it can be inspected, fixed, stripped, and refreshed safely.</p>
+<h2 id="config-yml">6. <code>config.yml</code></h2>
+<p>Controls global debug mode, protected vanilla recipe behavior, recipe book discovery, ingredient groups, default upgrade behavior, generated lore, leather color placeholders, inventory model mode, skin removal, fire/lava stripping, progression locks, and custom item protection.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># CoreArmorX main configuration.
 #
 # CoreArmorX is designed as a Paper-only vanilla+ armor progression plugin.
 # This file controls global behavior. Recipe definitions live in:
@@ -286,12 +289,11 @@ compatibility:
     # - REPLACE_ANYWAY: allow CoreArmorX transformations even when foreign PDC
     #   data is present. Use only when you know those custom items are safe.
     behavior: BLOCK_IF_DETECTED
-</code></pre>
-            <p><code>{item_lore}</code> must be its own generated lore entry. If it is missing, original lore remains stored in PDC but is not displayed.</p>
-
-            <h2 id="armor-upgrades-yml">7. <code>armor-upgrades.yml</code></h2>
-            <p>Defines normal armor progression recipes and special one-piece endpoint recipes. Supported fields include <code>enabled</code>, <code>from-tier</code>, <code>from-material</code>, <code>to-tier</code>, <code>to-material</code>, <code>ingredient</code>, <code>cost-mode</code>, <code>count</code>, and <code>permission</code>.</p>
-            <pre class="code-block"><code># CoreArmorX armor upgrade definitions.
+</code></pre></div>
+<p><code>{item_lore}</code> must be its own generated lore entry. If it is missing, original lore remains stored in PDC but is not displayed.</p>
+<h2 id="armor-upgrades-yml">7. <code>armor-upgrades.yml</code></h2>
+<p>Defines normal armor progression recipes and special one-piece endpoint recipes. Supported fields include <code>enabled</code>, <code>from-tier</code>, <code>from-material</code>, <code>to-tier</code>, <code>to-material</code>, <code>ingredient</code>, <code>cost-mode</code>, <code>count</code>, and <code>permission</code>.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># CoreArmorX armor upgrade definitions.
 #
 # These recipes change the real armor tier. They do not write CoreArmorX PDC
 # on normal upgraded items.
@@ -369,12 +371,11 @@ upgrades:
     ingredient: TURTLE_HELMET_MATERIALS
     count: 5
     permission: "corearmorx.upgrade.iron_helmet_to_turtle"
-</code></pre>
-            <p>The default armor cost model is helmet 5, chestplate 8, leggings 7, boots 4.</p>
-
-            <h2 id="armor-skins-yml">8. <code>armor-skins.yml</code></h2>
-            <p>Defines netherite-only visual skin recipes, maps output materials, and controls optional skin durability. Default skin ids are leather, copper, chainmail, iron, gold, and diamond.</p>
-            <pre class="code-block"><code># CoreArmorX netherite skin definitions.
+</code></pre></div>
+<p>The default armor cost model is helmet 5, chestplate 8, leggings 7, boots 4.</p>
+<h2 id="armor-skins-yml">8. <code>armor-skins.yml</code></h2>
+<p>Defines netherite-only visual skin recipes, maps output materials, and controls optional skin durability. Default skin ids are leather, copper, chainmail, iron, gold, and diamond.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># CoreArmorX netherite skin definitions.
 #
 # Skin recipes are netherite-only. A skin changes the real Material to the
 # configured output material while CoreArmorX applies netherite-equivalent
@@ -586,13 +587,12 @@ skin-durability:
     bar-segments: 10
     bar-full: "&lt;green&gt;|"
     bar-empty: "&lt;dark_gray&gt;|"
-</code></pre>
-            <p>Skin durability modes are <code>DISABLED</code>, <code>GLOBAL</code>, <code>BY_SKIN</code>, and <code>BY_ITEM</code>. Mending modes are <code>DISABLED</code>, <code>SPLIT</code>, and <code>DOUBLE</code>.</p>
-
-            <h2 id="messages-yml">9. <code>messages.yml</code></h2>
-            <p>Messages use Adventure MiniMessage. The configured prefix is prepended automatically. Only documented placeholders near each message should be used.</p>
-            <p>Inspect messages are useful for checking current material, clean material, visual skin, inventory model mode, CoreArmorX data, generated lore state, original lore snapshot, skin durability, leather color, tier, and armor piece.</p>
-            <pre class="code-block"><code># CoreArmorX messages.
+</code></pre></div>
+<p>Skin durability modes are <code>DISABLED</code>, <code>GLOBAL</code>, <code>BY_SKIN</code>, and <code>BY_ITEM</code>. Mending modes are <code>DISABLED</code>, <code>SPLIT</code>, and <code>DOUBLE</code>.</p>
+<h2 id="messages-yml">9. <code>messages.yml</code></h2>
+<p>Messages use Adventure MiniMessage. The configured prefix is prepended automatically. Only documented placeholders near each message should be used.</p>
+<p>Inspect messages are useful for checking current material, clean material, visual skin, inventory model mode, CoreArmorX data, generated lore state, original lore snapshot, skin durability, leather color, tier, and armor piece.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># CoreArmorX messages.
 #
 # All user-facing text should live here.
 # Messages use Adventure MiniMessage syntax:
@@ -711,11 +711,10 @@ admin:
     # Placeholder:
     # - {piece}: detected armor piece for normal armor
     piece: "&lt;dark_gray&gt;- &lt;gray&gt;Piece: &lt;white&gt;{piece}&lt;/white&gt;"
-</code></pre>
-
-            <h2 id="plugin-yml">10. <code>plugin.yml</code></h2>
-            <p>Complete bundled plugin descriptor. Maven resolves <code>${project.version}</code> when the release jar is built.</p>
-            <pre class="code-block"><code>name: CoreArmorX
+</code></pre></div>
+<h2 id="plugin-yml">10. <code>plugin.yml</code></h2>
+<p>Complete bundled plugin descriptor. Maven resolves <code>${project.version}</code> when the release jar is built.</p>
+<div class="fb-code-block"><pre><code class="language-yaml">name: CoreArmorX
 main: it.icewolf23x.corearmorx.CoreArmorXPlugin
 version: ${project.version}
 api-version: '1.21'
@@ -780,21 +779,20 @@ permissions:
       corearmorx.use.gold: true
       corearmorx.use.diamond: true
       corearmorx.use.netherite: true
-      corearmorx.use.turtle: true</code></pre>
-
-            <h2 id="permissions">11. Permissions</h2>
-            <pre class="code-block"><code>corearmorx.admin
+      corearmorx.use.turtle: true</code></pre></div>
+<h2 id="permissions">11. Permissions</h2>
+<div class="fb-code-block"><pre><code class="language-yaml">corearmorx.admin
 corearmorx.admin.reload
 corearmorx.admin.inspect
 corearmorx.admin.fixitem
 corearmorx.progression.bypass
 corearmorx.upgrade.*
 corearmorx.skin.*
-corearmorx.use.*</code></pre>
-            <p>Usage permissions matter only when both <code>progression-locks.enabled</code> and <code>progression-locks.blocks.usage</code> are true.</p>
-            <h3>Common Permission Setups</h3>
-            <p>If progression locks are disabled, players do not need upgrade or skin permissions to use the configured recipes. Admin permissions are still useful for staff commands.</p>
-            <pre class="code-block"><code># Staff tools.
+corearmorx.use.*</code></pre></div>
+<p>Usage permissions matter only when both <code>progression-locks.enabled</code> and <code>progression-locks.blocks.usage</code> are true.</p>
+<h3>Common Permission Setups</h3>
+<p>If progression locks are disabled, players do not need upgrade or skin permissions to use the configured recipes. Admin permissions are still useful for staff commands.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># Staff tools.
 lp group admin permission set corearmorx.admin true
 
 # Let a rank craft the early upgrade path.
@@ -806,41 +804,55 @@ lp group vip permission set corearmorx.skin.iron true
 lp group vip permission set corearmorx.skin.diamond true
 
 # Let a trusted rank bypass all CoreArmorX progression checks.
-lp group staff permission set corearmorx.progression.bypass true</code></pre>
-            <p>If you edit the <code>permission</code> value inside <code>armor-upgrades.yml</code> or <code>armor-skins.yml</code>, grant that exact node in your permission plugin. The wildcard nodes declared in <code>plugin.yml</code> cover the default bundled permissions.</p>
-            <h3>When To Use Usage Locks</h3>
-            <p>Use <code>progression-locks.blocks.usage: true</code> only when players should be stopped from equipping or using armor tiers they have not unlocked. This is stricter than blocking crafting, because found, traded, command-given, or staff-given armor can also be affected.</p>
-            <pre class="code-block"><code># Example usage-lock grant.
+lp group staff permission set corearmorx.progression.bypass true</code></pre></div>
+<p>If you edit the <code>permission</code> value inside <code>armor-upgrades.yml</code> or <code>armor-skins.yml</code>, grant that exact node in your permission plugin. The wildcard nodes declared in <code>plugin.yml</code> cover the default bundled permissions.</p>
+<h3>When To Use Usage Locks</h3>
+<p>Use <code>progression-locks.blocks.usage: true</code> only when players should be stopped from equipping or using armor tiers they have not unlocked. This is stricter than blocking crafting, because found, traded, command-given, or staff-given armor can also be affected.</p>
+<div class="fb-code-block"><pre><code class="language-yaml"># Example usage-lock grant.
 lp group default permission set corearmorx.use.leather true
 lp group default permission set corearmorx.use.copper true
 lp group knight permission set corearmorx.use.iron true
-lp group elite permission set corearmorx.use.netherite true</code></pre>
-
-            <h2 id="troubleshooting-quick-reference">12. Troubleshooting Quick Reference</h2>
-            <h3>The plugin folder did not generate</h3>
-            <ul><li>Confirm the jar is in the Paper server <code>plugins</code> folder, not a proxy folder.</li><li>Confirm the server is running Java 21 or newer.</li><li>Check startup logs for Paper API or Minecraft version warnings.</li><li>Restart the server after replacing the jar.</li></ul>
-            <h3>No recipe appears</h3>
-            <ul><li>Check <code>recipes.recipe-book.enabled</code>.</li><li>Check the relevant entry has <code>enabled: true</code>.</li><li>Run <code>/corearmorx reload</code>.</li><li>Check console warnings for invalid materials or costs above 8.</li></ul>
-            <h3>Recipe output appears but clicking does nothing</h3>
-            <ul><li>Check progression permissions if locks are enabled.</li><li>Use separate one-item ingredient slots.</li><li>Confirm the base item is not already skinned.</li><li>Check custom item compatibility mode.</li></ul>
-            <h3>Permissions seem ignored</h3>
-            <ul><li>Confirm <code>progression-locks.enabled: true</code>.</li><li>Confirm the relevant block under <code>progression-locks.blocks</code> is enabled.</li><li>Grant the exact permission configured on the upgrade or skin definition.</li><li>Test with a non-op player, because operators may inherit admin or wildcard permissions.</li></ul>
-            <h3>A custom item is blocked</h3>
-            <p>CoreArmorX blocks transformations on foreign custom item data by default to avoid corrupting items from other systems. Keep <code>compatibility.custom-items.behavior: BLOCK_IF_DETECTED</code> unless you have tested that those custom items are safe to convert.</p>
-            <h3>A new update has missing config keys</h3>
-            <p>Existing YAML files are not auto-merged with new packaged defaults. Back up your current files, compare them with the default files inside the new jar, add new keys manually, then run <code>/corearmorx reload</code>.</p>
-            <h3>Skinned armor lost expected lore</h3>
-            <p>Ensure <code>{item_lore}</code> exists in <code>skins.lore.generated-lines</code>, then hold the item and run <code>/corearmorx fixitem</code>.</p>
-            <h3>Player cannot equip armor</h3>
-            <p>Check <code>progression-locks.blocks.usage</code>, then grant <code>corearmorx.use.&lt;tier&gt;</code> or <code>corearmorx.progression.bypass</code>.</p>
-
-            <h2 id="production-validation-checklist">13. Production Validation Checklist</h2>
-            <ul><li>Run <code>/corearmorx reload</code>.</li><li>Confirm console has no CoreArmorX warnings.</li><li>Craft one normal upgrade from each configured path.</li><li>Craft one skin recipe.</li><li>Remove one skin with shears.</li><li>Inspect a skinned item with <code>/corearmorx inspect</code>.</li><li>Run <code>/corearmorx fixitem</code>.</li><li>Test fire/lava behavior if skin stripping changed.</li><li>Test permissions with a non-op account if progression locks are enabled.</li></ul>
-          </article>
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand footer-brand" href="./index.html"><span class="brand-mark" aria-hidden="true"><img src="./assets/corearmorx-logo.svg" alt="" width="40" height="40"></span><span class="brand-text">CoreArmorX</span></a><p>Vanilla+ armor progression and netherite armor skins for Paper servers.</p></div><div class="footer-links"><a href="./features.html">Features</a><a href="./installation.html">Setup</a><a href="./docs.html">Docs</a><a href="./faq.html">FAQ</a><a href="./support-policy.html">Support Policy</a><a href="https://buymeacoffee.com/lcewolf23x">Buy Me a Coffee</a><a href="https://github.com/IceWolf23X/CoreArmorX-issues">GitHub</a></div></div><div class="shell footer-bottom"><span>Copyright 2026 CoreArmorX. All rights reserved.</span><span>Configuration reference for server owners.</span></div></footer>
-    <script src="./assets/site.js"></script>
-  </body>
+lp group elite permission set corearmorx.use.netherite true</code></pre></div>
+<h2 id="troubleshooting-quick-reference">12. Troubleshooting Quick Reference</h2>
+<h3>The plugin folder did not generate</h3>
+<ul><li>Confirm the jar is in the Paper server <code>plugins</code> folder, not a proxy folder.</li><li>Confirm the server is running Java 21 or newer.</li><li>Check startup logs for Paper API or Minecraft version warnings.</li><li>Restart the server after replacing the jar.</li></ul>
+<h3>No recipe appears</h3>
+<ul><li>Check <code>recipes.recipe-book.enabled</code>.</li><li>Check the relevant entry has <code>enabled: true</code>.</li><li>Run <code>/corearmorx reload</code>.</li><li>Check console warnings for invalid materials or costs above 8.</li></ul>
+<h3>Recipe output appears but clicking does nothing</h3>
+<ul><li>Check progression permissions if locks are enabled.</li><li>Use separate one-item ingredient slots.</li><li>Confirm the base item is not already skinned.</li><li>Check custom item compatibility mode.</li></ul>
+<h3>Permissions seem ignored</h3>
+<ul><li>Confirm <code>progression-locks.enabled: true</code>.</li><li>Confirm the relevant block under <code>progression-locks.blocks</code> is enabled.</li><li>Grant the exact permission configured on the upgrade or skin definition.</li><li>Test with a non-op player, because operators may inherit admin or wildcard permissions.</li></ul>
+<h3>A custom item is blocked</h3>
+<p>CoreArmorX blocks transformations on foreign custom item data by default to avoid corrupting items from other systems. Keep <code>compatibility.custom-items.behavior: BLOCK_IF_DETECTED</code> unless you have tested that those custom items are safe to convert.</p>
+<h3>A new update has missing config keys</h3>
+<p>Existing YAML files are not auto-merged with new packaged defaults. Back up your current files, compare them with the default files inside the new jar, add new keys manually, then run <code>/corearmorx reload</code>.</p>
+<h3>Skinned armor lost expected lore</h3>
+<p>Ensure <code>{item_lore}</code> exists in <code>skins.lore.generated-lines</code>, then hold the item and run <code>/corearmorx fixitem</code>.</p>
+<h3>Player cannot equip armor</h3>
+<p>Check <code>progression-locks.blocks.usage</code>, then grant <code>corearmorx.use.&lt;tier&gt;</code> or <code>corearmorx.progression.bypass</code>.</p>
+<h2 id="production-validation-checklist">13. Production Validation Checklist</h2>
+<ul><li>Run <code>/corearmorx reload</code>.</li><li>Confirm console has no CoreArmorX warnings.</li><li>Craft one normal upgrade from each configured path.</li><li>Craft one skin recipe.</li><li>Remove one skin with shears.</li><li>Inspect a skinned item with <code>/corearmorx inspect</code>.</li><li>Run <code>/corearmorx fixitem</code>.</li><li>Test fire/lava behavior if skin stripping changed.</li><li>Test permissions with a non-op account if progression locks are enabled.</li></ul>
+</article>
+</div>
+</section>
+</main>
+<footer class="fb-site-footer">
+<div class="fb-container fb-container--wide fb-stack">
+<div class="fb-grid fb-grid--2">
+<div class="fb-flow">
+<a class="fb-brand corex-brand" href="./index.html">
+<img alt="" height="36" src="./assets/corearmorx-logo.svg" width="36"/><span>CoreArmorX</span>
+</a>
+<p>Vanilla+ armor progression and netherite armor skins for Paper servers.</p>
+</div>
+<nav aria-label="Footer navigation" class="fb-cluster"><a href="./features.html">Features</a><a href="./installation.html">Setup</a><a href="./configuration.html">Configuration</a><a href="./docs.html">Documentation</a><a href="./faq.html">FAQ</a><a href="https://github.com/IceWolf23X/CoreArmorX-issues" rel="noopener noreferrer" target="_blank">GitHub</a><a href="./installation.html#download">Download</a></nav>
+</div>
+<div class="fb-cluster corex-footer-meta">
+<span>Copyright 2026 CoreArmorX.</span>
+<span>Version 2026.1.1 · Java 21+ · Paper 1.21.11+</span>
+<a href="https://github.com/IceWolf23X/FrameBaseCSS" rel="noopener noreferrer" target="_blank">Built with FrameBaseCSS</a>
+</div>
+</div>
+</footer>
+<script src="./assets/vendor/highlightjs/highlight.min.js"></script><script src="./assets/vendor/highlightjs/languages/properties.min.js"></script><script src="./assets/site.js"></script></body>
 </html>
