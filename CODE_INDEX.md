@@ -13,7 +13,6 @@
 ## Shared assets
 
 - `assets/corearmorx-logo.svg` — Header, footer, and favicon logo.
-- `assets/corearmorx-logo.png` — Raster logo.
 - `assets/vendor/framebasecss/` — FrameBaseCSS distribution and license.
 - `assets/vendor/highlightjs/` — Highlight.js distribution and license.
 - `assets/styles.css` — CoreArmorX layouts, bStats presentation, and responsive adjustments.
