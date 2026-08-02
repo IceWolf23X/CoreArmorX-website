@@ -6,7 +6,6 @@
 - `features.html` — Armor progression, recipes, skins, compatibility, and administration.
 - `installation.html` — Paper requirements, installation, first startup, and setup checks.
 - `configuration.html` — Administrator configuration reference.
-- `configurations.html` — Redirect from the plural configuration URL.
 - `docs.html` — Documentation entry point.
 - `faq.html` — Common setup and behavior questions.
 - `support-policy.html` — Release and support policy.
