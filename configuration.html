@@ -27,7 +27,7 @@
 <header class="fb-doc-header corex-page-hero"><div class="fb-container fb-container--wide"><p class="fb-eyebrow">Complete Configuration Reference</p><h1>Configuration Reference</h1><p>Current CoreArmorX YAML files, first setup path, reload boundaries, runtime model, permissions, troubleshooting, and production checks.</p></div></header>
 <section class="fb-section">
 <div class="fb-container fb-container--wide fb-doc-shell corex-doc-shell">
-<aside aria-label="Page contents" class="fb-doc-sidebar fb-doc-nav-panel corex-toc"><strong>Contents</strong><a href="#before-you-configure">0. Before You Configure</a><a href="#starter-setup-path">1. Starter Setup Path</a><a href="#file-layout">2. File Layout</a><a href="#reload-vs-restart">3. Reload vs Restart</a><a href="#clean-setup">4. Clean Setup</a><a href="#runtime-model">5. Runtime Model</a><a href="#config-yml">6. config.yml</a><a href="#armor-upgrades-yml">7. armor-upgrades.yml</a><a href="#armor-skins-yml">8. armor-skins.yml</a><a href="#messages-yml">9. messages.yml</a><a href="#plugin-yml">10. plugin.yml</a><a href="#permissions">11. Permissions</a><a href="#troubleshooting-quick-reference">12. Troubleshooting</a><a href="#production-validation-checklist">13. Production Checklist</a></aside>
+<aside aria-label="Page contents" class="fb-doc-sidebar fb-doc-nav-panel corex-toc"><strong>Contents</strong><a href="#before-you-configure">0. Before You Configure</a><a href="#starter-setup-path">1. Starter Setup Path</a><a href="#file-layout">2. File Layout</a><a href="#reload-vs-restart">3. Reload vs Restart</a><a href="#clean-setup">4. Clean Setup</a><a href="#runtime-model">5. Runtime Model</a><a href="#config-yml">6. config.yml</a><a href="#armor-upgrades-yml">7. armor-upgrades.yml</a><a href="#armor-skins-yml">8. armor-skins.yml</a><a href="#messages-yml">9. messages.yml</a><a href="#permissions">10. Permissions</a><a href="#troubleshooting-quick-reference">11. Troubleshooting</a><a href="#production-validation-checklist">12. Production Checklist</a></aside>
 <article class="fb-doc-main fb-doc-content">
 <h2 id="before-you-configure">0. Before You Configure</h2>
 <p>Minimum requirements are Paper 1.21.11+, Java 21+, CoreArmorX installed on a Paper server, and a permission plugin only if progression locks are enabled.</p>
@@ -60,7 +60,6 @@ progression-locks:
   armor-upgrades.yml
   armor-skins.yml
   messages.yml</code></pre></div>
-<p><code>plugin.yml</code> is bundled inside the jar and documents commands, aliases, permissions, and plugin identity.</p>
 <h2 id="reload-vs-restart">3. Reload vs Restart</h2>
 <p>Use <code>/corearmorx reload</code> for normal YAML edits, recipe changes, message edits, lore template changes, and progression permission node changes in YAML. Restart when replacing the jar, changing Paper/Minecraft version, or recovering from startup-only errors.</p>
 <p>Existing YAML files are not automatically merged with newly packaged defaults. Compare live files with packaged defaults when updating snapshots.</p>
@@ -615,7 +614,7 @@ commands:
   reloaded: "&lt;green&gt;CoreArmorX reloaded."
 
   # Placeholder:
-  # - {version}: plugin version from plugin.yml
+  # - {version}: currently loaded plugin version
   version: "&lt;gray&gt;CoreArmorX version &lt;white&gt;{version}&lt;/white&gt;."
 
   # Help command lines. Permission-gated lines are only shown when the sender
@@ -712,75 +711,7 @@ admin:
     # - {piece}: detected armor piece for normal armor
     piece: "&lt;dark_gray&gt;- &lt;gray&gt;Piece: &lt;white&gt;{piece}&lt;/white&gt;"
 </code></pre></div>
-<h2 id="plugin-yml">10. <code>plugin.yml</code></h2>
-<p>Complete bundled plugin descriptor. Maven resolves <code>${project.version}</code> when the release jar is built.</p>
-<div class="fb-code-block"><pre><code class="language-yaml">name: CoreArmorX
-main: it.icewolf23x.corearmorx.CoreArmorXPlugin
-version: ${project.version}
-api-version: '1.21'
-description: Vanilla+ armor progression and netherite armor skins for Paper.
-author: IceWolf23X
-prefix: CoreArmorX
-commands:
-  corearmorx:
-    description: CoreArmorX main command.
-    usage: /corearmorx
-    aliases:
-      - cax
-permissions:
-  corearmorx.admin:
-    description: Grants all CoreArmorX admin permissions.
-    default: op
-    children:
-      corearmorx.admin.reload: true
-      corearmorx.admin.inspect: true
-      corearmorx.admin.fixitem: true
-      corearmorx.progression.bypass: true
-  corearmorx.admin.reload:
-    description: Allows reloading CoreArmorX configuration.
-    default: op
-  corearmorx.admin.inspect:
-    description: Allows inspecting held CoreArmorX armor items.
-    default: op
-  corearmorx.admin.fixitem:
-    description: Allows repairing CoreArmorX metadata/profile on the held item.
-    default: op
-  corearmorx.progression.bypass:
-    description: Bypasses CoreArmorX permission progression locks.
-    default: op
-  corearmorx.skin.*:
-    description: Allows every CoreArmorX armor skin.
-    default: op
-    children:
-      corearmorx.skin.leather: true
-      corearmorx.skin.copper: true
-      corearmorx.skin.chainmail: true
-      corearmorx.skin.iron: true
-      corearmorx.skin.gold: true
-      corearmorx.skin.diamond: true
-  corearmorx.upgrade.*:
-    description: Allows every CoreArmorX armor upgrade.
-    default: op
-    children:
-      corearmorx.upgrade.leather_to_copper: true
-      corearmorx.upgrade.copper_to_chainmail: true
-      corearmorx.upgrade.chainmail_to_iron: true
-      corearmorx.upgrade.iron_to_gold: true
-      corearmorx.upgrade.iron_to_diamond: true
-      corearmorx.upgrade.iron_helmet_to_turtle: true
-  corearmorx.use.*:
-    description: Allows using every CoreArmorX armor tier when usage locks are enabled.
-    default: op
-    children:
-      corearmorx.use.leather: true
-      corearmorx.use.copper: true
-      corearmorx.use.chainmail: true
-      corearmorx.use.iron: true
-      corearmorx.use.gold: true
-      corearmorx.use.diamond: true
-      corearmorx.use.netherite: true
-      corearmorx.use.turtle: true</code></pre></div>
-<h2 id="permissions">11. Permissions</h2>
+<h2 id="permissions">10. Permissions</h2>
 <div class="fb-code-block"><pre><code class="language-yaml">corearmorx.admin
 corearmorx.admin.reload
 corearmorx.admin.inspect
@@ -805,7 +736,7 @@ lp group vip permission set corearmorx.skin.diamond true
 
 # Let a trusted rank bypass all CoreArmorX progression checks.
 lp group staff permission set corearmorx.progression.bypass true</code></pre></div>
-<p>If you edit the <code>permission</code> value inside <code>armor-upgrades.yml</code> or <code>armor-skins.yml</code>, grant that exact node in your permission plugin. The wildcard nodes declared in <code>plugin.yml</code> cover the default bundled permissions.</p>
+<p>If you edit the <code>permission</code> value inside <code>armor-upgrades.yml</code> or <code>armor-skins.yml</code>, grant that exact node in your permission plugin. The default wildcard permission nodes cover the bundled permissions.</p>
 <h3>When To Use Usage Locks</h3>
 <p>Use <code>progression-locks.blocks.usage: true</code> only when players should be stopped from equipping or using armor tiers they have not unlocked. This is stricter than blocking crafting, because found, traded, command-given, or staff-given armor can also be affected.</p>
 <div class="fb-code-block"><pre><code class="language-yaml"># Example usage-lock grant.
@@ -813,7 +744,7 @@ lp group default permission set corearmorx.use.leather true
 lp group default permission set corearmorx.use.copper true
 lp group knight permission set corearmorx.use.iron true
 lp group elite permission set corearmorx.use.netherite true</code></pre></div>
-<h2 id="troubleshooting-quick-reference">12. Troubleshooting Quick Reference</h2>
+<h2 id="troubleshooting-quick-reference">11. Troubleshooting Quick Reference</h2>
 <h3>The plugin folder did not generate</h3>
 <ul><li>Confirm the jar is in the Paper server <code>plugins</code> folder, not a proxy folder.</li><li>Confirm the server is running Java 21 or newer.</li><li>Check startup logs for Paper API or Minecraft version warnings.</li><li>Restart the server after replacing the jar.</li></ul>
 <h3>No recipe appears</h3>
