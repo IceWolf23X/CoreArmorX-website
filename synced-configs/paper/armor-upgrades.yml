@@ -1,0 +1,78 @@
+# CoreArmorX armor upgrade definitions.
+#
+# These recipes change the real armor tier. They do not write CoreArmorX PDC
+# on normal upgraded items.
+#
+# Supported fields:
+# - enabled: true/false
+# - from-tier: LEATHER, COPPER, CHAINMAIL, IRON, GOLD, DIAMOND, NETHERITE
+# - from-material: exact Bukkit Material, used for special one-piece recipes
+# - to-tier: target tier for normal four-piece armor sets
+# - to-material: exact Bukkit Material, used for special one-piece recipes
+# - ingredient: Bukkit Material or ingredient-groups.<id> from config.yml
+# - cost-mode: VANILLA_RECIPE_COST or CUSTOM
+# - count: explicit ingredient count, used only when cost-mode is CUSTOM
+# - permission: permission required when progression locks are enabled
+#
+# VANILLA_RECIPE_COST means:
+# - helmet: 5
+# - chestplate: 8
+# - leggings: 7
+# - boots: 4
+
+upgrades:
+  leather_to_copper:
+    # First progression step after vanilla leather armor.
+    enabled: true
+    from-tier: LEATHER
+    to-tier: COPPER
+    ingredient: COPPER_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.leather_to_copper"
+
+  copper_to_chainmail:
+    # Uses iron nuggets so chainmail feels like an intermediate vanilla+ tier.
+    enabled: true
+    from-tier: COPPER
+    to-tier: CHAINMAIL
+    ingredient: CHAINMAIL_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.copper_to_chainmail"
+
+  chainmail_to_iron:
+    # Converts chainmail into iron using the normal armor-piece material counts.
+    enabled: true
+    from-tier: CHAINMAIL
+    to-tier: IRON
+    ingredient: IRON_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.chainmail_to_iron"
+
+  iron_to_gold:
+    # Optional alternate progression branch from iron to gold.
+    enabled: true
+    from-tier: IRON
+    to-tier: GOLD
+    ingredient: GOLD_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.iron_to_gold"
+
+  iron_to_diamond:
+    # Main progression path from iron to diamond.
+    # Diamond -> netherite remains vanilla smithing and is not handled here.
+    enabled: true
+    from-tier: IRON
+    to-tier: DIAMOND
+    ingredient: DIAMOND_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.upgrade.iron_to_diamond"
+
+  iron_helmet_to_turtle:
+    # Special helmet-only progression branch.
+    # Uses exact materials so this does not create recipes for other armor pieces.
+    enabled: true
+    from-material: IRON_HELMET
+    to-material: TURTLE_HELMET
+    ingredient: TURTLE_HELMET_MATERIALS
+    count: 5
+    permission: "corearmorx.upgrade.iron_helmet_to_turtle"

@@ -1,0 +1,9 @@
+<p>CoreArmorX routes protected direct armor crafting through configurable upgrade definitions. The bundled path is leather → copper → chainmail → iron → diamond, with iron → gold and iron helmet → turtle helmet as alternate endpoints.</p>
+<h2 id="default-routes">Default routes</h2>
+<ul><li><code>LEATHER → COPPER</code></li><li><code>COPPER → CHAINMAIL</code></li><li><code>CHAINMAIL → IRON</code></li><li><code>IRON → DIAMOND</code></li><li><code>IRON → GOLD</code></li><li><code>IRON_HELMET → TURTLE_HELMET</code></li></ul>
+<h2 id="recipe-model">Recipe model</h2>
+<p>Ingredient groups accept configured Bukkit materials. Runtime matching requires separate one-item ingredient slots; stacking the cost into one slot is intentionally rejected. Static recipe-book recipes can expose discovery while the runtime matcher validates the real item, cost, metadata and permission.</p>
+<h2 id="protected-vanilla-recipes">Protected vanilla recipes</h2>
+<p>With <code>recipes.override-vanilla-equipment-recipes: true</code>, protected direct outputs use their matching <code>minecraft:*</code> keys. Leather armor crafting and vanilla diamond-to-netherite smithing are not changed. Original protected recipes return when the override is disabled or the plugin stops.</p>
+<h2 id="costs">Costs and durability</h2>
+<p><code>VANILLA_RECIPE_COST</code> uses 5/8/7/4 ingredients for helmet/chestplate/leggings/boots. <code>CUSTOM</code> reads a positive <code>count</code>. Upgrade output durability can be <code>REFILL</code>, <code>KEEP_DAMAGE</code> or <code>KEEP_PERCENTAGE</code>; repair cost preservation is separately configurable.</p>

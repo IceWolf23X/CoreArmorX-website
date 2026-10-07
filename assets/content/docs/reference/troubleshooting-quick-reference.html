@@ -1,0 +1,6 @@
+<h2 id="startup">Plugin does not enable</h2><p>Confirm Paper/Minecraft 1.21.11+, Java 21+, the correct JAR and complete startup logs. Restart after correcting classloading/runtime problems.</p>
+<h2 id="recipe-output">A recipe appears but will not craft</h2><p>Use separate one-item ingredient slots. Check the route/skin is enabled, ingredient group is valid, permission locks, whether the base is already skinned and custom-item compatibility.</p>
+<h2 id="vanilla-recipe">A direct vanilla recipe still works</h2><p>Check <code>recipes.override-vanilla-equipment-recipes</code>, reload, and review warnings. Leather crafting and diamond-to-netherite smithing are intentionally untouched.</p>
+<h2 id="reload">Reload does not change an existing item</h2><p>Reload changes definitions for new/refreshed items. Use <code>/corearmorx fixitem</code> on a recognized skinned item when its display/profile needs refresh; restart only for the documented restart boundaries.</p>
+<h2 id="custom-item">A custom item is blocked</h2><p>The safe default rejects foreign PDC. Do not choose <code>REPLACE_ANYWAY</code> until compatibility is understood.</p>
+<h2 id="skin-fire">A dropped skin survives fire or lava</h2><p>This is the default protection behavior. Enable skin stripping only if the intended result is clean netherite rather than destruction.</p>

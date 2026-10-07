@@ -1,0 +1,212 @@
+# CoreArmorX netherite skin definitions.
+#
+# Skin recipes are netherite-only. A skin changes the real Material to the
+# configured output material while CoreArmorX applies netherite-equivalent
+# durability, attributes, fire resistance, and PDC identity.
+#
+# Supported fields:
+# - enabled: true/false
+# - display-name: name used in generated lore and messages
+# - ingredient: Bukkit Material or ingredient-groups.<id> from config.yml
+# - cost-mode: VANILLA_RECIPE_COST or CUSTOM
+# - count: explicit ingredient count, used only when cost-mode is CUSTOM
+# - dyeable: true only for leather skin
+# - permission: permission required when progression locks are enabled
+# - output-materials: visual output Material per armor piece
+#
+# VANILLA_RECIPE_COST means:
+# - helmet: 5
+# - chestplate: 8
+# - leggings: 7
+# - boots: 4
+
+skins:
+  leather:
+    # Dyeable visual skin. Vanilla leather dye recipes should keep CoreArmorX data.
+    enabled: true
+    display-name: "Leather"
+    ingredient: LEATHER
+    cost-mode: VANILLA_RECIPE_COST
+    dyeable: true
+    permission: "corearmorx.skin.leather"
+    output-materials:
+      helmet: LEATHER_HELMET
+      chestplate: LEATHER_CHESTPLATE
+      leggings: LEATHER_LEGGINGS
+      boots: LEATHER_BOOTS
+
+  copper:
+    # Copper visual skin. Requires Paper/Minecraft versions with copper armor.
+    enabled: true
+    display-name: "Copper"
+    ingredient: COPPER_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.copper"
+    output-materials:
+      helmet: COPPER_HELMET
+      chestplate: COPPER_CHESTPLATE
+      leggings: COPPER_LEGGINGS
+      boots: COPPER_BOOTS
+
+  chainmail:
+    # Chainmail visual skin, using iron nuggets as the material cost.
+    enabled: true
+    display-name: "Chainmail"
+    ingredient: CHAINMAIL_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.chainmail"
+    output-materials:
+      helmet: CHAINMAIL_HELMET
+      chestplate: CHAINMAIL_CHESTPLATE
+      leggings: CHAINMAIL_LEGGINGS
+      boots: CHAINMAIL_BOOTS
+
+  iron:
+    # Iron visual skin.
+    enabled: true
+    display-name: "Iron"
+    ingredient: IRON_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.iron"
+    output-materials:
+      helmet: IRON_HELMET
+      chestplate: IRON_CHESTPLATE
+      leggings: IRON_LEGGINGS
+      boots: IRON_BOOTS
+
+  gold:
+    # Gold visual skin. CoreArmorX does not add custom piglin logic in v1.
+    enabled: true
+    display-name: "Gold"
+    ingredient: GOLD_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.gold"
+    output-materials:
+      helmet: GOLDEN_HELMET
+      chestplate: GOLDEN_CHESTPLATE
+      leggings: GOLDEN_LEGGINGS
+      boots: GOLDEN_BOOTS
+
+  diamond:
+    # Diamond visual skin. This does not affect vanilla diamond -> netherite smithing.
+    enabled: true
+    display-name: "Diamond"
+    ingredient: DIAMOND_ARMOR_MATERIALS
+    cost-mode: VANILLA_RECIPE_COST
+    permission: "corearmorx.skin.diamond"
+    output-materials:
+      helmet: DIAMOND_HELMET
+      chestplate: DIAMOND_CHESTPLATE
+      leggings: DIAMOND_LEGGINGS
+      boots: DIAMOND_BOOTS
+
+skin-durability:
+  # Skin durability is stored in CoreArmorX PDC and applies only to skinned
+  # armor. It does not replace vanilla DAMAGE/MAX_DAMAGE on the real item.
+  #
+  # Supported v1 modes:
+  # - DISABLED: no skin durability is tracked.
+  # - GLOBAL: every skin uses global.max-durability.
+  # - BY_SKIN: each skin reads by-skin.materials.<skin>, then fallback values.
+  # - BY_ITEM: each piece reads by-item.materials.<skin>.<piece>, then fallback values.
+  mode: DISABLED
+
+  global:
+    # Used only when mode is GLOBAL.
+    # Every skinned armor item receives this same skin max durability.
+    max-durability: 5000
+
+  by-skin:
+    # Used when mode is BY_SKIN and as a fallback for BY_ITEM.
+    # If a skin material is missing below, CoreArmorX uses default-max-durability.
+    default-max-durability: 5000
+
+    materials:
+      # Skin max durability per visual skin material.
+      leather: 6000
+      copper: 5000
+      chainmail: 5500
+      iron: 7000
+      gold: 2500
+      diamond: 9000
+
+  by-item:
+    # Used only when mode is BY_ITEM.
+    # Missing piece values fall back to the material default, then BY_SKIN,
+    # then this default-max-durability.
+    default-max-durability: 5000
+
+    materials:
+      leather:
+        # Fallback for leather pieces not listed below.
+        default-max-durability: 6000
+        helmet: 1800
+        chestplate: 3200
+        leggings: 2800
+        boots: 1500
+
+      copper:
+        default-max-durability: 5000
+        helmet: 1500
+        chestplate: 2700
+        leggings: 2300
+        boots: 1250
+
+      chainmail:
+        default-max-durability: 5500
+        helmet: 1650
+        chestplate: 2930
+        leggings: 2570
+        boots: 1380
+
+      iron:
+        default-max-durability: 7000
+        helmet: 2100
+        chestplate: 3730
+        leggings: 3270
+        boots: 1750
+
+      gold:
+        default-max-durability: 2500
+        helmet: 750
+        chestplate: 1330
+        leggings: 1170
+        boots: 630
+
+      diamond:
+        default-max-durability: 9000
+        helmet: 2700
+        chestplate: 4800
+        leggings: 4200
+        boots: 2250
+
+  damage:
+    # Supported v1 mode: MIRROR_REAL_DAMAGE.
+    # When the real armor takes durability damage, skin damage increases by the
+    # same amount multiplied by multiplier.
+    mode: MIRROR_REAL_DAMAGE
+    multiplier: 1.0
+
+  # Supported v1 action: REMOVE_SKIN.
+  # When skin damage reaches max, the skin is stripped and the armor returns
+  # to its clean netherite Material. Materials are not refunded.
+  on-break: REMOVE_SKIN
+
+  mending:
+    # Supported v1 modes:
+    # - DISABLED: CoreArmorX does not touch mending.
+    # - SPLIT: odd repair points go to the real item, the rest repairs the skin.
+    # - DOUBLE: vanilla repair remains unchanged and the skin repairs by the
+    #   same amount. Recommended when damage mode is MIRROR_REAL_DAMAGE.
+    mode: DISABLED
+
+  placeholders:
+    # Value inserted into durability placeholders when skin durability is
+    # disabled or missing on the inspected item.
+    disabled-value: ""
+
+    # Basic MiniMessage bar fragments used by {skin_durability_bar}.
+    # Include color tags here because the renderer does not hardcode colors.
+    bar-segments: 10
+    bar-full: "<green>|"
+    bar-empty: "<dark_gray>|"

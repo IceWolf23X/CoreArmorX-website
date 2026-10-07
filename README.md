@@ -1,23 +1,28 @@
-# CoreArmorX Website
+# CoreArmorX website
 
-Static GitHub Pages website for CoreArmorX, a Paper armor progression plugin with configurable upgrade recipes and netherite visual skins.
+Primary site: <https://wiki-corearmorx.icewolf23x.dev/>. This repository contains the CoreArmorX 2026.1.2 landing page, offline-capable wiki, synchronized public configuration reference and optional public website-release catalog.
 
-<https://icewolf23x.github.io/CoreArmorX-website/>
+The site has no backend and can open directly from `index.html`. Product identity and links live in `assets/js/data/site-config.js`; landing copy in `landing-content.js`; wiki metadata in `docs-content.js`; each article body is independently editable under `assets/content/docs/`. Root `features.html`, `installation.html`, `configuration.html`, `docs.html`, `faq.html` and `support-policy.html` preserve previous URLs/bookmarks through `assets/js/legacy-routes.js`.
 
-## Pages
+## Configuration defaults
 
-- `index.html`: product overview, live bStats data, and related CoreX plugins.
-- `features.html`: progression, recipes, skins, safety, and administration.
-- `installation.html`: requirements, installation, and first setup.
-- `configuration.html`: server configuration reference.
-- `docs.html`: documentation hub.
-- `faq.html`: common questions and troubleshooting.
-- `support-policy.html`: release and support policy.
+Only four public resources are allow-listed from private `IceWolf23X/CoreArmorX-plugin` on `main`: `config.yml`, `armor-upgrades.yml`, `armor-skins.yml` and `messages.yml`. `plugin.yml`, sources, tests, secrets and runtime data are excluded. LF-normalized text snapshots live in `synced-configs/paper/`; the generated JavaScript bundle exists for offline `file://` use.
 
-## Technology
+```powershell
+node tools/sync-plugin-configs.mjs ..\plugin .
+node tools/build-config-bundle.mjs .
+node tools/build-docs-bundle.mjs .
+node tools/build-docs-bundle.mjs . --check
+node --test
+node tests/validate-theme.mjs
+```
 
-The site uses plain HTML, CSS, JavaScript, SVG, and PNG. FrameBaseCSS `1.2.0` provides the layout and components. Highlight.js `11.11.1` highlights configuration examples. Required browser assets are stored under `assets/vendor/`.
+The GitHub sync workflow does nothing without the later `COREX_PLUGIN_READ_TOKEN`. That secret needs read-only Contents access to the private plugin repository. Credentials never belong in browser assets or synchronized state.
 
-## Local preview
+## Downloads and releases
 
-Serve the repository root with a static HTTP server and open `index.html`.
+Download buttons point to <https://modrinth.com/plugin/corearmorx>. The Releases view may also read public releases from `IceWolf23X/CoreArmorX-website`; an empty public release catalog is valid. It never reads the private plugin repository.
+
+## Editing and publication
+
+See [SETUP.md](SETUP.md) for the local workflow and `docs/` for architecture, sync, gallery, release and deployment contracts. Local preparation does not authorize a commit, push, release or Pages deployment.

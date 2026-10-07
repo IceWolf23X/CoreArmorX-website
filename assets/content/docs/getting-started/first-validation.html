@@ -1,0 +1,8 @@
+<h2 id="clean-setup">Clean setup</h2>
+<ol><li>Confirm version 2026.1.2 enables on Paper 1.21.11+ with Java 21+.</li><li>Run <code>/corearmorx reload</code> and review every warning.</li><li>Craft one item through each enabled upgrade branch using separate one-item ingredient slots.</li><li>Apply, inspect, fix and remove one netherite skin.</li><li>Test leather dyeing and lore if leather skins are enabled.</li></ol>
+<h2 id="permissions">Permission validation</h2>
+<p>If progression locks are enabled, test with a non-operator account. Verify upgrade, skin, usage and bypass behavior independently.</p>
+<h2 id="safety">Safety validation</h2>
+<p>Test a foreign custom item before changing <code>BLOCK_IF_DETECTED</code>. If fire/lava stripping is changed, test both a dropped skinned item and the restored clean netherite result.</p>
+<h2 id="production-validation-checklist">Production checklist</h2>
+<ul><li>Keep a copy of the active YAML files.</li><li>Confirm the intended protected vanilla recipes are replaced.</li><li>Check recipe-book discovery separately from runtime crafting.</li><li>Do not assume a successful reload refreshes every existing item immediately.</li></ul>

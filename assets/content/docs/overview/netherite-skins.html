@@ -1,0 +1,11 @@
+<p>Skin recipes accept clean netherite armor and convert it to a vanilla visual material while applying a netherite-equivalent armor profile. Already-skinned pieces must be stripped before another skin can be applied.</p>
+<h2 id="default-skins">Default skins</h2>
+<p>Leather, copper, chainmail, iron, gold and diamond skins cover helmet, chestplate, leggings and boots. Leather skins remain compatible with vanilla dye behavior.</p>
+<h2 id="inventory-models">Inventory models</h2>
+<p><code>REAL_TIER</code> is the default and keeps a netherite inventory model while the equipped appearance follows the visual skin. <code>VISUAL_SKIN</code> shows the visual material icon. CoreArmorX needs no resource pack for either mode.</p>
+<h2 id="lore">Lore and placeholders</h2>
+<p><code>skins.lore.generated-lines</code> controls the final generated lore. A list entry exactly equal to <code>{item_lore}</code> reinserts the saved original lore; omitting it hides but does not discard the snapshot. Placeholders cover skin, identifiers, clean/visual/real materials, leather color formats and cosmetic durability values.</p>
+<h2 id="skin-durability">Cosmetic durability</h2>
+<p>Modes are <code>DISABLED</code>, <code>GLOBAL</code>, <code>BY_SKIN</code> and <code>BY_ITEM</code>. Damage currently mirrors real item damage with a multiplier. On break, the only supported action is <code>REMOVE_SKIN</code>. Mending can be disabled, split repair points or double the repair into cosmetic durability.</p>
+<h2 id="removal-and-fire">Removal and fire</h2>
+<p>By default, a skinned piece plus shears returns clean netherite armor and damages the shears by one. Dropped skinned armor is protected from configured fire/lava destruction while stripping is disabled. When enabled, those causes strip the skin instead of destroying the item.</p>

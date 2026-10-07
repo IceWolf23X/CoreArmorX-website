@@ -1,0 +1,7 @@
+<p>CoreArmorX preserves supported data while changing armor materials: custom name, original lore, enchantments, durability damage, max damage where supported, repair cost, trims, flags, unbreakable state, compatible custom data and non-CoreArmorX persistent data.</p>
+<h2 id="foreign-data">Foreign custom data</h2>
+<p><code>BLOCK_IF_DETECTED</code> is the safe default: transformations stop when foreign persistent data is present. <code>REPLACE_ANYWAY</code> permits conversion and should be used only when the administrator knows the other item format is compatible.</p>
+<h2 id="identity">CoreArmorX identity</h2>
+<p>Only skinned armor and its internal skin state carry CoreArmorX identity. Normal upgraded armor remains ordinary vanilla armor. This boundary avoids making every progression output dependent on the plugin.</p>
+<h2 id="admin-repair">Inspection and repair</h2>
+<p><code>/corearmorx inspect</code> reports the held item’s current and clean materials, skin, model mode, lore snapshot and durability state. <code>/corearmorx fixitem</code> reapplies the configured profile and display to a recognized skinned item; it is not a generic item converter.</p>
