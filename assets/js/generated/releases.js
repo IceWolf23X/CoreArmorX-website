@@ -3,7 +3,7 @@ window.COREX_RELEASES = {
   "schemaVersion": 2,
   "provider": "github",
   "repository": "IceWolf23X/CoreArmorX-website",
-  "generatedAt": "2026-10-08T00:38:43.211Z",
+  "generatedAt": "2026-10-08T10:42:19.990Z",
   "releases": [
     {
       "tag_name": "v2026.1.2",
@@ -20,7 +20,7 @@ window.COREX_RELEASES = {
           "size": 167936,
           "digest": "sha256:da5c5f5631969bb4cfdd27c6b2d900a00043fed5dd060c0f7592e051ed165cc0",
           "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.2/CoreArmorX-2026.1.2.jar",
-          "download_count": 0
+          "download_count": 1
         }
       ]
     },
@@ -39,7 +39,7 @@ window.COREX_RELEASES = {
           "size": 143072,
           "digest": "sha256:10a0280b8f520a22dcb64c3ac554c0d7ee45b656fa770b182c690880f08bf0fa",
           "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.1/CoreArmorX-2026.1.1.jar",
-          "download_count": 0
+          "download_count": 1
         }
       ]
     },
@@ -58,7 +58,7 @@ window.COREX_RELEASES = {
           "size": 141564,
           "digest": "sha256:3d8d2d0c059270ad8a141184c997a8143f21c086184565e5d6b0d4eaffd3a61a",
           "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.0/CoreArmorX-2026.1.0.jar",
-          "download_count": 0
+          "download_count": 1
         }
       ]
     }
