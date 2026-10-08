@@ -39,3 +39,7 @@ Pages Actions additionally requires repository variable `COREX_PAGES_ENABLED=tru
 ## Public output
 
 `node tools/prepare-pages.mjs .` builds ignored `_site/` from an allowlist. Verify the CNAME, routes, assets, synchronized defaults and absence of secrets before any authorized publication.
+
+## Privacy and sitemap
+
+See [Privacy and crawl-discovery maintenance](docs/PRIVACY_AND_SEO.md) for editable notice content, controller/contact, canonical page inventory and required generation checks.

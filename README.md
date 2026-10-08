@@ -26,3 +26,7 @@ Download buttons point to <https://modrinth.com/plugin/corearmorx>. The Releases
 ## Editing and publication
 
 See [SETUP.md](SETUP.md) for the local workflow and `docs/` for architecture, sync, gallery, release and deployment contracts. Local preparation does not authorize a commit, push, release or Pages deployment.
+
+## Privacy and sitemap
+
+See [Privacy and crawl-discovery maintenance](docs/PRIVACY_AND_SEO.md) for editable notice content, controller/contact, canonical page inventory and required generation checks.
