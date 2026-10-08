@@ -3,6 +3,64 @@ window.COREX_RELEASES = {
   "schemaVersion": 2,
   "provider": "github",
   "repository": "IceWolf23X/CoreArmorX-website",
-  "generatedAt": "2026-10-07T21:45:57.319Z",
-  "releases": []
+  "generatedAt": "2026-10-08T00:38:43.211Z",
+  "releases": [
+    {
+      "tag_name": "v2026.1.2",
+      "name": "CoreArmorX 2026.1.2 (Beta)",
+      "body": "# CoreArmorX 2026.1.2\n\n## Added\n\n- Added anonymous bStats reporting for Paper/Purpur, including current and record server/player statistics.\n\n## Compatibility\n\n- Metrics respect the server-wide bStats setting in `plugins/bStats/config.yml`; no CoreArmorX configuration migration is required.\n- A metrics connection failure does not prevent CoreArmorX from starting.\n",
+      "html_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/tag/v2026.1.2",
+      "draft": false,
+      "prerelease": true,
+      "published_at": "2026-10-08T00:38:41Z",
+      "assets": [
+        {
+          "name": "CoreArmorX-2026.1.2.jar",
+          "state": "uploaded",
+          "size": 167936,
+          "digest": "sha256:da5c5f5631969bb4cfdd27c6b2d900a00043fed5dd060c0f7592e051ed165cc0",
+          "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.2/CoreArmorX-2026.1.2.jar",
+          "download_count": 0
+        }
+      ]
+    },
+    {
+      "tag_name": "v2026.1.1",
+      "name": "CoreArmorX 2026.1.1",
+      "body": "# CoreArmorX 2026.1.1\n\n## Changed\n- `recipes.override-vanilla-equipment-recipes: true` now replaces protected vanilla armor recipes with CoreArmorX progression recipes.\n- Original protected vanilla recipes are restored when the option is disabled or the plugin shuts down.\n",
+      "html_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/tag/v2026.1.1",
+      "draft": false,
+      "prerelease": false,
+      "published_at": "2026-10-08T00:38:38Z",
+      "assets": [
+        {
+          "name": "CoreArmorX-2026.1.1.jar",
+          "state": "uploaded",
+          "size": 143072,
+          "digest": "sha256:10a0280b8f520a22dcb64c3ac554c0d7ee45b656fa770b182c690880f08bf0fa",
+          "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.1/CoreArmorX-2026.1.1.jar",
+          "download_count": 0
+        }
+      ]
+    },
+    {
+      "tag_name": "v2026.1.0",
+      "name": "CoreArmorX 2026.1.0",
+      "body": "# CoreArmorX 2026.1.0\n\n## Added\n- Added configurable armor progression through vanilla crafting, with ingredient groups, recipe costs and permission locks.\n- Added netherite armor skins using vanilla armor appearances, with configurable lore and durability behavior.\n- Added skin removal, inspection and configuration reload commands.\n",
+      "html_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/tag/v2026.1.0",
+      "draft": false,
+      "prerelease": false,
+      "published_at": "2026-10-08T00:38:34Z",
+      "assets": [
+        {
+          "name": "CoreArmorX-2026.1.0.jar",
+          "state": "uploaded",
+          "size": 141564,
+          "digest": "sha256:3d8d2d0c059270ad8a141184c997a8143f21c086184565e5d6b0d4eaffd3a61a",
+          "browser_download_url": "https://github.com/IceWolf23X/CoreArmorX-website/releases/download/v2026.1.0/CoreArmorX-2026.1.0.jar",
+          "download_count": 0
+        }
+      ]
+    }
+  ]
 };
